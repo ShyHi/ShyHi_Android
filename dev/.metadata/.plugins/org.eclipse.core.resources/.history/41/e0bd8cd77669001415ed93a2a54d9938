@@ -29,7 +29,8 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        new fetchJSON().execute();
+        TextView tv = (TextView) findViewById(R.id.textView1);
+        tv.setText(new fetchJSON().execute());
     }
     //helper method, should be seperated into own .java file 
     public String getJSON(String address){
@@ -69,12 +70,7 @@ public class MainActivity extends Activity {
             finally{System.out.println("Success");}
             return readJSON;
         }
-        
-        @Override
-        protected void onPostExecute(String result) {
-        	TextView tv = (TextView) findViewById(R.id.textView1);
-        	tv.setText(result);
-        }
+
   
     }
     
