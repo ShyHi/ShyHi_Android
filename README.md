@@ -17,13 +17,15 @@ Anonymous, location based messaging.
 Development Status
 ==================
 
-Current:
+Current: we are currently working on the Minimum Viable Product that fulfills the above features.
 
 
-Future: 
+Future: In the future we hope to add an iOS app that functions the same way. We also hope to add 
+many new features: group ShiHi's (chatrooms), themed conversations, and potentially video 
+functionality. 
 
 
-View Business Model Canvas: 
+View Business Model Canvas: **working on new iteration, link will be here shortly
 
 
 How It Works
@@ -43,6 +45,11 @@ Application Infrastructure & Design
 
 ShyHi trys to keep it simple. We're leveraging other open source software to power this little project of ours. We're running an Ubunutu 14.04 server hosted on DigitalOcean paid for by the github student pack. CouchDB is powering our server database and functions. We think its a pretty neat bit of open source software and find that it meets all of our needs. The Client side utilizes Couchbase Lite to sync and replicate with the server. Google Play Services are powering  our location services and we've taken inspiration and 
 tips from a number of other open source projects.
+
+
+Support
+=======
+Check out our forum to communicate with other users and to find support: shihi.yuku.com
 
 Contributors
 ============
