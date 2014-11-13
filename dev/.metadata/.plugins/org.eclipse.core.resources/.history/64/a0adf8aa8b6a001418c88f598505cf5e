@@ -1,0 +1,28 @@
+package dev.rug.shyhi;
+
+import java.security.Timestamp;
+import java.util.UUID;
+
+public class Message {
+
+	private UUID toID;
+	private UUID fromID;
+	private Timestamp msgTimestamp;
+	
+	public Message(){};
+	public Message(UUID to, UUID from, Timestamp ts){
+		toID = to;
+		fromID = from;
+		msgTimestamp = ts;
+	}
+	
+	public UUID getToID(){
+		return toID;
+	}
+	public UUID getFromID(){
+		return fromID;
+	}
+	public Timestamp getTimestamp(){
+		return msgTimestamp;
+	}
+}

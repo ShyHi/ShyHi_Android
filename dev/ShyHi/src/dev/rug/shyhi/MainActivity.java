@@ -13,6 +13,7 @@ import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.app.Activity;
@@ -29,9 +30,10 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        //ShyHiDBConnect shyHiDbConn = new ShyHiDBConnect();
         new fetchJSON().execute();
     }
-    //helper method, should be seperated into own .java file 
+  //helper method, should be seperated into own .java file 
     public String getJSON(String address){
     	StringBuilder builder = new StringBuilder();
     	HttpClient client = new DefaultHttpClient();
@@ -61,19 +63,21 @@ public class MainActivity extends Activity {
     //simple tester class
     private class fetchJSON extends AsyncTask<URL, Integer, String> {
         protected String doInBackground(URL... urls) {
-        	String readJSON = getJSON("http://104.236.22.60:5984/shyhi/_design/msg/_view/get_message");
-            try{
-            	JSONObject jsonObject = new JSONObject(readJSON);
-            	Log.i(MainActivity.class.getName(), jsonObject.getString("rows"));
-            } catch(Exception e){e.printStackTrace();}
-            finally{System.out.println("Success");}
+        	String readJSON = getJSON("http://104.236.22.60:5984/shyhi/_design/messages/_view/getMsg?key=%22user1%22");
             return readJSON;
         }
         
         @Override
         protected void onPostExecute(String result) {
         	TextView tv = (TextView) findViewById(R.id.textView1);
-        	tv.setText(result);
+        	//tv.setText(result);
+        	try {
+				JSONObject json = new JSONObject(result);
+				tv.setText(json.getJSONArray("rows").toString(1));
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
         }
   
     }
