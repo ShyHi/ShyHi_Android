@@ -43,13 +43,15 @@ out of your business though). Just open it up, type something stupid and hopeful
 Application Infrastructure & Design
 ===================================
 
-ShyHi trys to keep it simple. We're leveraging other open source software to power this little project of ours. We're running an Ubunutu 14.04 server hosted on DigitalOcean paid for by the github student pack. CouchDB is powering our server database and functions. We think its a pretty neat bit of open source software and find that it meets all of our needs. The Client side utilizes Couchbase Lite to sync and replicate with the server. Google Play Services are powering  our location services and we've taken inspiration and 
+ShyHi trys to keep it simple. We're leveraging other open source software to power this little project of ours. We're running an Ubunutu 14.04 server
+hosted on DigitalOcean paid for by the github student pack. Couchbase is powering our server database and functions. We think its a pretty neat bit of
+open source software and find that it meets all of our needs. Google Play Services are powering  our location services and we've taken inspiration and 
 tips from a number of other open source projects.
 
 
 Support
 =======
-Check out our forum to communicate with other users and to find support: shihi.yuku.com
+Check out our forum to communicate with other contributors and to find support: shihi.yuku.com
 
 Contributors
 ============
