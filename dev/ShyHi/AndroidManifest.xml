@@ -28,6 +28,14 @@
             android:name=".ConversationsActivity"
             android:label="@string/title_activity_conversations" >
         </activity>
+        <activity
+            android:name=".Conversation"
+            android:label="@string/title_activity_conversation" >
+        </activity>
+        <activity
+            android:name=".List_Item"
+            android:label="@string/title_activity_list__item" >
+        </activity>
     </application>
 
 </manifest>
