@@ -16,10 +16,6 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name=".MainActivity"
-            android:label="@string/app_name" >
-        </activity>
-        <activity
             android:name=".ConversationsActivity"
             android:label="@string/title_activity_conversations" >
             <intent-filter>
@@ -35,18 +31,6 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="dev.rug.shyhi.conversationsactivity" />
-        </activity>
-        <activity
-            android:name=".ShyAdapter"
-            android:label="@string/title_activity_shy_adapter" >
-        </activity>
-        <activity
-            android:name=".Conversation"
-            android:label="@string/title_activity_conversation" >
-        </activity>
-        <activity
-            android:name=".List_Item"
-            android:label="@string/title_activity_list__item" >
         </activity>
     </application>
 

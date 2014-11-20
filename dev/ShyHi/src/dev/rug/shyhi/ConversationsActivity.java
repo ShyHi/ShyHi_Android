@@ -22,7 +22,6 @@ public class ConversationsActivity extends ActionBarActivity {
 	private ArrayList<Convo> convos;
 
 	private String userID;
-	private String convosRestUrl = "http://104.236.22.60:5984/shyhi/_design/conversation/_view/get_all_convos?key=";
 	RestUtils restUtil = new RestUtils(); 
 	SharedPreferences userInfo = null;
 	@Override
@@ -30,11 +29,7 @@ public class ConversationsActivity extends ActionBarActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_conversations);
 		userInfo = getSharedPreferences("dev.rug.shyhi",MODE_PRIVATE);
-		
-		ListView lv = (ListView)findViewById(R.id.shysList);
-		
-		
-		
+		ListView lv = (ListView)findViewById(R.id.shysList);	
 	}
 	@Override
 	protected void onResume(){
@@ -46,7 +41,9 @@ public class ConversationsActivity extends ActionBarActivity {
             editor.commit();
 		}
 		Log.i("STRING",userInfo.getString("user_id",""));
-		getConvo(userInfo.getString("user_id",""));
+		
+		restUtil.getAllConvos("user1");
+		//getConvo(userInfo.getString("user_id",""));
 	}
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -66,24 +63,5 @@ public class ConversationsActivity extends ActionBarActivity {
 		}
 		return super.onOptionsItemSelected(item);
 	}
-	
-
-	public void getConvo(String id){
-		new fetchJSON().execute(id);
-		
-	}
-	private class fetchJSON extends AsyncTask<String, Integer, String> {
-        @Override
-		protected String doInBackground(String... id) {
-        	String convoJSON = restUtil.getJSON(convosRestUrl);
-            return convoJSON;
-        }
-        
-        @Override
-        protected void onPostExecute(String result) {
-        	TextView tv = (TextView) findViewById(R.id.tv1);
-        	tv.setText(result);
-        }
-    }
 	
 }

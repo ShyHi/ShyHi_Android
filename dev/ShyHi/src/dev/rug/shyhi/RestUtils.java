@@ -6,6 +6,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.concurrent.ExecutionException;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -26,21 +27,38 @@ import android.widget.TextView;
 
 //helper utility class for calling rest and getting json objects
 public class RestUtils {
-	
 
 	public RestUtils(){};
 	
+	//It works! When passed a convo id it will return the JSON of the convo. It still needs to 
+	//Though right now it does not use GSON to convert them to Java Objects..working on that
 	public Convo getConvoById(String convoID){
-		Convo convo = null;
-    	String convoStr = getJSON("http://104.236.22.60:5984/shyhi/_design/conversation/_view/get_convos?key=%22"+convoID+"%22");
+		//String convoStr = 
+    	String convoStr = "";
+		try {
+			convoStr = new fetchJSON().execute("http://104.236.22.60:5984/shyhi/_design/conversation/_view/get_convo?key=%22"+convoID+"%22").get();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		Gson gson = new Gson();
+		Convo convo = null;
 		Log.i("getConvoById",convoStr);
     	return convo;
 	}
 	
+	//It works! When passed a user ID, it returns all convos that user is involved in
+	//Though right now it does not use GSON to convert them to Java Objects
 	public ArrayList<Convo> getAllConvos(String key){
-    	String allConvosStr = getJSON("http://104.236.22.60:5984/shyhi/_design/conversation/_view/get_all_convos?key=%22"+key+"%22");
+    	String allConvosStr = "";
+		try {
+			allConvosStr = new fetchJSON().execute("http://104.236.22.60:5984/shyhi/_design/conversation/_view/get_all_convo?key=%22"+key+"%22").get();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
     	ArrayList<Convo> convoArr = null;
+    	Log.i("getAllConvos",allConvosStr);
     	//turn the allConvosStr into a java object
     	return convoArr;
     }
@@ -52,6 +70,7 @@ public class RestUtils {
 	
 	//helper method to get the JSON object
     public String getJSON(String address){
+    	
     	StringBuilder builder = new StringBuilder();
     	HttpClient client = new DefaultHttpClient();
     	HttpGet httpGet = new HttpGet(address);
@@ -68,7 +87,7 @@ public class RestUtils {
     				builder.append(line);
     			}
     		} else {
-    			Log.e(MainActivity.class.toString(),"Failed to get JSON object");
+    			Log.e("ShyHi","Failed to get JSON object");
     		}
     	}catch(ClientProtocolException e){
     		e.printStackTrace();
@@ -78,8 +97,16 @@ public class RestUtils {
     	return builder.toString();
     }
     
-    
-    //add a function that takes in a conversation and then returns the conversation updated
-    
-  
+	//helper AsyncTask class
+	private class fetchJSON extends AsyncTask<String, Integer, String> {
+        @Override
+		protected String doInBackground(String... id) {
+        	String convoJSON = getJSON(id[0]);
+            return convoJSON;
+        } 
+        @Override
+        protected void onPostExecute(String result) {
+        	
+        }
+    }
 }
