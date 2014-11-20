@@ -40,6 +40,14 @@
             android:name=".ShyAdapter"
             android:label="@string/title_activity_shy_adapter" >
         </activity>
+        <activity
+            android:name=".Conversation"
+            android:label="@string/title_activity_conversation" >
+        </activity>
+        <activity
+            android:name=".List_Item"
+            android:label="@string/title_activity_list__item" >
+        </activity>
     </application>
 
 </manifest>

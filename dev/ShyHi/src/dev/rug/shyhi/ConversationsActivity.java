@@ -13,6 +13,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 
+
 /*This activity will display the list view of all the users conversations
 	it should handle retrieving all of the 
 */
