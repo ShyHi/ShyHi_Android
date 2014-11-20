@@ -1,6 +1,6 @@
 package dev.rug.shyhi;
 
-import java.util.ArrayList;
+import java.net.URL;
 
 import android.support.v7.app.ActionBarActivity;
 import android.content.SharedPreferences;
@@ -9,39 +9,32 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ListView;
 import android.widget.TextView;
 
+public class ConvoActivity extends ActionBarActivity {
 
-/*This activity will display the list view of all the users conversations
-	it should handle retrieving all of the 
-*/
-public class ConversationsActivity extends ActionBarActivity {
-	
-	private ArrayList<Convo> convos;
-
-	private String userID;
-	private String convosRestUrl = "http://104.236.22.60:5984/shyhi/_design/conversation/_view/get_all_convos?key=";
-	RestUtils restUtil = new RestUtils(); 
+    public static final String PREFS_NAME = "userInfoPrefs";
+    public String restUrl = "http://104.236.22.60:5984/shyhi/_design/conversation/_view/get_convo?key=";
+	RestUtils restUtil = new RestUtils();
 	SharedPreferences userInfo = null;
+	private Convo convo;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_conversations);
+		setContentView(R.layout.activity_convo);
 		userInfo = getSharedPreferences("dev.rug.shyhi",MODE_PRIVATE);
-		
-		ListView lv = (ListView)findViewById(R.id.shysList);
-		
-		
+		//get convo id, which will be passed as an intent extra
 		
 	}
+
 	@Override
 	protected void onResume(){
 		super.onResume();
 		if(userInfo.getBoolean("firstRun", true)){
             userInfo.edit().putBoolean("firstrun", false).commit();
             SharedPreferences.Editor editor = userInfo.edit();
-            editor.putString("user_id", "user1"); //need to add a UUID somehow
+            editor.putString("user_id", "user1");
             editor.commit();
 		}
 		Log.i("STRING",userInfo.getString("user_id",""));
@@ -50,7 +43,7 @@ public class ConversationsActivity extends ActionBarActivity {
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.conversations, menu);
+		getMenuInflater().inflate(R.menu.convo, menu);
 		return true;
 	}
 
@@ -66,7 +59,6 @@ public class ConversationsActivity extends ActionBarActivity {
 		return super.onOptionsItemSelected(item);
 	}
 	
-
 	public void getConvo(String id){
 		new fetchJSON().execute(id);
 		
@@ -74,7 +66,7 @@ public class ConversationsActivity extends ActionBarActivity {
 	private class fetchJSON extends AsyncTask<String, Integer, String> {
         @Override
 		protected String doInBackground(String... id) {
-        	String convoJSON = restUtil.getJSON(convosRestUrl);
+        	String convoJSON = restUtil.getJSON("http://104.236.22.60:5984/shyhi/_design/conversation/_view/get_convo?key="+"%22"+id[0]+"%22");
             return convoJSON;
         }
         
@@ -84,5 +76,4 @@ public class ConversationsActivity extends ActionBarActivity {
         	tv.setText(result);
         }
     }
-	
 }

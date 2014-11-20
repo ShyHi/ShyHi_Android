@@ -6,14 +6,12 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="dev.rug.shyhi.ConversationsActivity" >
+    tools:context="dev.rug.shyhi.ConvoActivity" >
 
-    <ListView
-        android:id="@+id/shysList"
-        android:layout_width="fill_parent"
+    <TextView
+        android:id="@+id/tv1"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:divider="#b5b5b5"
-        android:dividerHeight="1dp" />
- 
+        android:text="@string/hello_world" />
 
 </RelativeLayout>
