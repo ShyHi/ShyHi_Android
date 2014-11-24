@@ -1,14 +1,17 @@
 package dev.rug.shyhi;
 
 import java.net.URL;
+import java.util.ArrayList;
 
 import android.support.v7.app.ActionBarActivity;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ListView;
 import android.widget.TextView;
 
 public class ConvoActivity extends ActionBarActivity {
@@ -18,6 +21,10 @@ public class ConvoActivity extends ActionBarActivity {
 	RestUtils restUtil = new RestUtils();
 	SharedPreferences userInfo = null;
 	private Convo convo;
+	private String userID = "";
+	private ArrayList<Message> messages;
+	private convoAdapter adapter;
+
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -25,20 +32,20 @@ public class ConvoActivity extends ActionBarActivity {
 		setContentView(R.layout.activity_convo);
 		userInfo = getSharedPreferences("dev.rug.shyhi",MODE_PRIVATE);
 		//get convo id, which will be passed as an intent extra
-		
+		Intent intent = getIntent();
+	    userID = intent.getStringExtra("idExtra");	
 	}
 
 	@Override
 	protected void onResume(){
-		super.onResume();
-		if(userInfo.getBoolean("firstRun", true)){
-            userInfo.edit().putBoolean("firstrun", false).commit();
-            SharedPreferences.Editor editor = userInfo.edit();
-            editor.putString("user_id", "user1");
-            editor.commit();
-		}
-		Log.i("STRING",userInfo.getString("user_id",""));
-		getConvo(userInfo.getString("user_id",""));
+		super.onResume();	
+		convo = restUtil.getConvoById(userID);
+		// pass context and data to the custom adapter
+		messages = convo.getMessages();
+	    adapter = new convoAdapter(this, messages);
+		ListView lv = (ListView)findViewById(R.id.msgsLv);	
+	    //setListAdapter
+	    lv.setAdapter(adapter);
 	}
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -58,22 +65,4 @@ public class ConvoActivity extends ActionBarActivity {
 		}
 		return super.onOptionsItemSelected(item);
 	}
-	
-	public void getConvo(String id){
-		new fetchJSON().execute(id);
-		
-	}
-	private class fetchJSON extends AsyncTask<String, Integer, String> {
-        @Override
-		protected String doInBackground(String... id) {
-        	String convoJSON = restUtil.getJSON("http://104.236.22.60:5984/shyhi/_design/conversation/_view/get_convo?key="+"%22"+id[0]+"%22");
-            return convoJSON;
-        }
-        
-        @Override
-        protected void onPostExecute(String result) {
-        	TextView tv = (TextView) findViewById(R.id.tv1);
-        	tv.setText(result);
-        }
-    }
 }

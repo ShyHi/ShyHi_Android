@@ -3,12 +3,16 @@ package dev.rug.shyhi;
 import java.util.ArrayList;
 
 import android.support.v7.app.ActionBarActivity;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -20,6 +24,7 @@ import android.widget.TextView;
 public class ConversationsActivity extends ActionBarActivity {
 	
 	private ArrayList<Convo> convos;
+	private conversationsAdapter adapter;
 
 	private String userID;
 	RestUtils restUtil = new RestUtils(); 
@@ -29,7 +34,6 @@ public class ConversationsActivity extends ActionBarActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_conversations);
 		userInfo = getSharedPreferences("dev.rug.shyhi",MODE_PRIVATE);
-		ListView lv = (ListView)findViewById(R.id.shysList);	
 	}
 	@Override
 	protected void onResume(){
@@ -41,9 +45,21 @@ public class ConversationsActivity extends ActionBarActivity {
             editor.commit();
 		}
 		Log.i("STRING",userInfo.getString("user_id",""));
-		
-		restUtil.getAllConvos("user1");
-		//getConvo(userInfo.getString("user_id",""));
+		convos = restUtil.getAllConvos("user1");
+		// pass context and data to the custom adapter
+	    adapter = new conversationsAdapter(this, convos);
+		ListView lv = (ListView)findViewById(R.id.shysList);	
+	    //setListAdapter
+	    lv.setAdapter(adapter);
+	    lv.setOnItemClickListener(new OnItemClickListener() {
+			public void onItemClick(AdapterView<?> parent, View view,int position, long id) {
+			// selected item 
+				Intent intent = new Intent(getApplicationContext(), ConvoActivity.class);
+				String wQuotes = convos.get(position).getId();
+				intent.putExtra("idExtra",wQuotes.subSequence(1, wQuotes.length()-1));
+				startActivity(intent);
+			}
+		});
 	}
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {

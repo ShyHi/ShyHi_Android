@@ -5,7 +5,6 @@ import java.util.ArrayList;
 public class Convo {
 
 	private String _id;
-	private String _rev;
 	private String type;
 	private String user1;
 	private String user2;
@@ -13,10 +12,8 @@ public class Convo {
 	
 	
 	public Convo(){};
-	public Convo(String i, String r, String t, String u1, String u2, ArrayList<Message> m){
+	public Convo(String i, String u1, String u2, ArrayList<Message> m){
 		_id = i;
-		_rev = r;
-		type = t;
 		user1 = u1;
 		user2 = u2;
 		messages = m;
@@ -24,9 +21,6 @@ public class Convo {
 	
 	public String getId(){
 		return _id;
-	}
-	public String getRev(){
-		return _rev;
 	}
 	public String getType(){
 		return type;
@@ -46,7 +40,7 @@ public class Convo {
 	}
 	
 	public String getMostRecentMessage(){
-		return messages.get(messages.size()).getMessage();
+		return messages.get(messages.size()-1).getMessage();
 	}
 	
 }

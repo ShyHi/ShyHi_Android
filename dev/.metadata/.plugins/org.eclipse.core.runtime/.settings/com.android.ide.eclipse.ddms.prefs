@@ -8,3 +8,4 @@ logcat.view.colsize.TID=70
 logcat.view.colsize.Tag=141
 logcat.view.colsize.Text=744
 logcat.view.colsize.Time=200
+logcat.view.filters.list=name\: 'shy', tag\: '', text\: '', pid\: '', app\: 'dev.rug.shyhi', level\: 'verbose', 

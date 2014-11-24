@@ -11,12 +11,12 @@ public class Message {
 	@SerializedName("from")
 	private String fromID;
 	@SerializedName("timestamp")
-	private Timestamp msgTimestamp;
+	private String msgTimestamp;
 	@SerializedName("message")
 	private String message;
 	
 	public Message(){};
-	public Message(String to, String from, Timestamp ts,String msg){
+	public Message(String to, String from, String ts,String msg){
 		toID = to;
 		fromID = from;
 		msgTimestamp = ts;
@@ -29,7 +29,7 @@ public class Message {
 	public String getFromID(){
 		return fromID;
 	}
-	public Timestamp getTimestamp(){
+	public String getTimestamp(){
 		return msgTimestamp;
 	}
 	public String getMessage(){
