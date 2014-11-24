@@ -50,6 +50,15 @@ functionality. If you want to help us get these going please jump right in, see 
 
 View Business Model Canvas: **working on new iteration, link will be here shortly
 
+####Application Development Status and Goals:
+
+Last Achieved Goal: RestUtils now returns JSON objects, Custom ListViews completed in first iteration
+
+Next Goals: Complete RestUtils handling JSON to POJO(Plain old Java Object) via GSON library
+            Location Services
+            Messaging updating
+            Message ListView & Threading
+
 
 ###Application Infrastructure & Design
 ===================================
