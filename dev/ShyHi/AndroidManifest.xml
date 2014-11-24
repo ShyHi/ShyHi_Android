@@ -27,10 +27,10 @@
         <activity
             android:name=".ConvoActivity"
             android:label="@string/title_activity_convo"
-            android:parentActivityName=".conversationsactivity" >
+            android:parentActivityName=".ConversationsActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="dev.rug.shyhi.conversationsactivity" />
+                android:value="dev.rug.shyhi.ConversationsActivity" />
         </activity>
     </application>
 

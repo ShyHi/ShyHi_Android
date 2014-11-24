@@ -9,7 +9,7 @@
     tools:context="dev.rug.shyhi.ConvoActivity" >
 
     <ListView
-        android:id="@+id/msgsLv"
+        android:id="@+id/msgsLv2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="" />
