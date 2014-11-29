@@ -7,38 +7,38 @@ import com.google.gson.annotations.SerializedName;
 public class Message {
 	
 	@SerializedName("to")
-	private UUID toID;
+	private String toID;
 	@SerializedName("from")
-	private UUID fromID;
+	private String fromID;
 	@SerializedName("timestamp")
-	private Timestamp msgTimestamp;
+	private String msgTimestamp;
 	@SerializedName("message")
 	private String message;
 	
 	public Message(){};
-	public Message(UUID to, UUID from, Timestamp ts,String msg){
+	public Message(String to, String from, String ts,String msg){
 		toID = to;
 		fromID = from;
 		msgTimestamp = ts;
 		message = msg;
 	}
 	
-	public UUID getToID(){
+	public String getToID(){
 		return toID;
 	}
-	public UUID getFromID(){
+	public String getFromID(){
 		return fromID;
 	}
-	public Timestamp getTimestamp(){
+	public String getTimestamp(){
 		return msgTimestamp;
 	}
 	public String getMessage(){
 		return message;
 	}
-	public void setToID(UUID t){
+	public void setToID(String t){
 		toID = t;
 	}
-	public void setFromID(UUID f){
+	public void setFromID(String f){
 		fromID = f;
 	}
 	public void setMessage(String msg){
