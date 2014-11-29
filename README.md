@@ -3,6 +3,11 @@ ShyHi
 
 Location based anonymous messaging application. It's like heroin for your connectivity fix. Get frisky.
 
+![alt tag](https://raw.github.com/ChapmanCPSC370/ShyHi/master/ShyHiDesignDoc.doc)
+
+
+Checkout the [awesome landing page](http://chapmancpsc370.github.io/ShyHi/)
+
 ###Mission Statement: 
 =====
 Our Mission, honestly, we're just looking to fight boredom, have a good laugh. We're not trying to change the world or go full Zuckerberg. We're not going to steal your data, sell it, or leak your illicit goodies. So if you're a connection junkie like ourselves and most millenials, check out what we've done and contribute in any way you can!
