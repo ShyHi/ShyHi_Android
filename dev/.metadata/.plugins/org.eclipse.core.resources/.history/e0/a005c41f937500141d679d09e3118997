@@ -142,7 +142,6 @@ public class RestUtils {
             HttpPut put=new HttpPut();
             HttpEntity httpEntity;
             StringEntity stringEntity=new StringEntity(jsonObject.toString());
-			Log.i("convoStr",jsonObject.toString());
             stringEntity.setContentEncoding(new BasicHeader(HTTP.CONTENT_TYPE, "application/json"));
             httpEntity=stringEntity;
             put.setEntity(httpEntity);

@@ -108,6 +108,8 @@ public class ConvoActivity extends ActionBarActivity {
 	    protected Void doInBackground(Object... params) {
 	            String url = (String) params[0];
 	            JsonObject jsonObj = (JsonObject) params[1];
+	            Log.i("URL",url);
+	            Log.i("Obj",jsonObj.toString());
 	            try {
 					restUtil.putJSON(url,jsonObj);
 				} catch (Exception e) {
