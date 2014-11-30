@@ -101,6 +101,7 @@ public class ConvoActivity extends ActionBarActivity {
 		Log.i("TESt JSON Stuff",convo.getId()+" "+convo.getRev()+" "+convo.getUser1()+" "+ convo.getMostRecentMessage());
 		EditText messageET = (EditText) findViewById(R.id.newmsg);
 		String newMsg = "\""+messageET.getText().toString()+"\"";
+		messageET.setText("");
 		putMessage(newMsg);
 		adapter.notifyDataSetChanged();
 	}
