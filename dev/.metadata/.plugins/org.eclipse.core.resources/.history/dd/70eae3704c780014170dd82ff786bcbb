@@ -138,8 +138,8 @@ public class RestUtils {
     }
     
   //helper method to PUT the JSON object
-    public String putJSON(String urlStr, String putStr) throws Exception{ 
-    	/*
+    public void putJSON(String urlStr, String putStr) throws Exception{ 
+    	
     	URL url = new URL(urlStr);
     	HttpURLConnection httpCon = (HttpURLConnection) url.openConnection();
     	httpCon.setDoOutput(true);
@@ -147,20 +147,21 @@ public class RestUtils {
     	OutputStreamWriter out = new OutputStreamWriter(httpCon.getOutputStream());
     	out.write(putStr);
     	out.close();
-    	*/
+    	/*
             HttpClient httpClient = new DefaultHttpClient();
             HttpResponse response;
             HttpPut put=new HttpPut();
             HttpEntity httpEntity;
-            StringEntity stringEntity=new StringEntity(putStr);
+            StringEntity stringEntity=new StringEntity(jsonObject.toString());
             stringEntity.setContentEncoding(new BasicHeader(HTTP.CONTENT_TYPE, "application/json"));
             httpEntity=stringEntity;
             put.setEntity(httpEntity);
-            put.setURI(new URI(urlStr));
+            put.setURI(new URI(url));
+            Log.i("entitiy ",stringEntity.toString());
             put.setHeader("Content-type", "application/json");
             response=httpClient.execute(put);
             return parseHttpResponse(response);
-            
+            */
      }
     
     public  String parseHttpResponse(HttpResponse response) throws Exception {

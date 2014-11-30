@@ -2,8 +2,6 @@ package dev.rug.shyhi;
 
 import java.util.ArrayList;
 
-import android.util.Log;
-
 public class Convo {
 
 	private String _id;
@@ -45,16 +43,6 @@ public class Convo {
 	public String getUser2(){
 		return user2;
 	}
-	public String getOtherUser(String user){
-		if(getUser1().equals(user)){
-			Log.i("retUser",getUser2());
-			return getUser2();
-		}
-		else{
-			Log.i("retUser",getUser1());
-			return getUser1();
-		}
-	}
 	public ArrayList<Message> getMessages(){
 		return messages;
 	}
@@ -67,25 +55,21 @@ public class Convo {
 		return messages.get(messages.size()-1).getMessage();
 	}
 	public String getMsgsStr(){
-		ArrayList<Message> msgs = getMessages();
+		ArrayList msgs = getMessages();
 		String retStr = "";
 		for(int i = 0; i < msgs.size(); ++i){
-			if(i == msgs.size()-1)
-				retStr = retStr + msgs.get(i).messageToString();
-			else
-				retStr = retStr + msgs.get(i).messageToString() +",";
-		
+			retStr.concat(msgs.get(i).messageToString();)
 		}
-		return retStr;
 	}
 	public String toStringForPut(){
-		String convoStr = "{"+"\"_id\":"+getId()+","+
-				"\"_rev\":"+getRev()+","+
-				"\"type\":"+"\"convo\","+
-				"\"user1\":"+getUser1()+","+
-				"\"user2\":"+getUser2()+","+
-				"\"messages\": ["+getMsgsStr()+"]}";
-		return convoStr;				
+		String convoStr = "{"+"\"_id\""+getId()+
+				"\"_rev\":"+getRev()+
+				"\"type\":"+getType()+
+				"\"user1\":"+getUser1()+
+				"\"user2\":"+getUser1()+
+				
+
+				
 	}
 	
 }
