@@ -44,11 +44,5 @@ public class Message {
 	public void setMessage(String msg){
 		message = msg;
 	}
-	public String messageToString(){
-		String msgStr = "{\"from\": "+getFromID()+","+
-						"\"to\": "+getToID()+","+
-						"\"message\": "+getMessage()+","+
-						"\"timestamp\":"+getTimestamp()+"}";
-		return msgStr;
-	}
+	
 }

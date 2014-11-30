@@ -2,8 +2,6 @@ package dev.rug.shyhi;
 
 import java.util.ArrayList;
 
-import android.util.Log;
-
 public class Convo {
 
 	private String _id;
@@ -44,16 +42,6 @@ public class Convo {
 	}
 	public String getUser2(){
 		return user2;
-	}
-	public String getOtherUser(String user){
-		if(getUser1().equals(user)){
-			Log.i("retUser",getUser2());
-			return getUser2();
-		}
-		else{
-			Log.i("retUser",getUser1());
-			return getUser1();
-		}
 	}
 	public ArrayList<Message> getMessages(){
 		return messages;

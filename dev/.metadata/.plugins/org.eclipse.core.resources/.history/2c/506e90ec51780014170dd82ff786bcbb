@@ -81,7 +81,7 @@ public class ConvoActivity extends ActionBarActivity {
 		else{
 			otherUser = convo.getUser1();
 		}
-		Message msgObj = new Message(otherUser,"\""+userID+"\"","\"timestamp\"",msg);
+		Message msgObj = new Message(otherUser,userID,"timestamp",msg);
 		convo.addMessage(msgObj);
 		String convoStr = convo.toStringForPut();
 		try {
@@ -100,7 +100,7 @@ public class ConvoActivity extends ActionBarActivity {
 	public void sendMessage(View v){
 		Log.i("TESt JSON Stuff",convo.getId()+" "+convo.getRev()+" "+convo.getUser1()+" "+ convo.getMostRecentMessage());
 		EditText messageET = (EditText) findViewById(R.id.newmsg);
-		String newMsg = "\""+messageET.getText().toString()+"\"";
+		String newMsg = messageET.getText().toString();
 		putMessage(newMsg);
 		adapter.notifyDataSetChanged();
 	}
