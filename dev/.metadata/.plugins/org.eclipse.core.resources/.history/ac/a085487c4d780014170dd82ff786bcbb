@@ -45,9 +45,9 @@ public class Message {
 		message = msg;
 	}
 	public String messageToString(){
-		String msgStr = "{\"from\": "+getFromID()+","+
-						"\"to\": "+getToID()+","+
-						"\"message\": "+getMessage()+","+
+		String msgStr = "{\"from\": "+getFromID()+
+						"\"to\": "+getToID()+
+						"\"message\": "+getMessage()+
 						"\"timestamp\":"+getTimestamp()+"}";
 		return msgStr;
 	}

@@ -81,16 +81,14 @@ public class ConvoActivity extends ActionBarActivity {
 		else{
 			otherUser = convo.getUser1();
 		}
-		Message msgObj = new Message(otherUser,"\""+userID+"\"","\"timestamp\"",msg);
+		Message msgObj = new Message(otherUser,userID,"timestamp",msg);
 		convo.addMessage(msgObj);
 		String convoStr = convo.toStringForPut();
 		try {
 			String idStr = convo.getId().substring(1,convo.getId().length()-1);
 			String putUrl = "http://104.236.22.60:5984/shyhi/"+idStr;
-			//new putJSONAsync().execute(putUrl,"{\"_id\": \"739dae773b24dba2a5bdad5bd503a328\",\"_rev\": \"2-cee1e20d1a8b92c9127a895d905c7669\",\"type\": \"convo\",\"user1\": \"user2\",\"user2\":\"user1\",\"messages\": [{\"from\": \"user2\",\"to\": \"user1\",\"message\": \"Potato\",\"timestamp\": \"timestampGoesHere\"},{\"from\": \"user1\",\"to\": \"user2\",\"message\": \"Spud!\",\"timestamp\": \"timestampGoesHere\"},{\"from\": \"user2\",\"to\": \"user1\",\"message\": \"Rawr\",\"timestamp\": \"timestampGoesHere\"}]}");
 			new putJSONAsync().execute(putUrl,convoStr);
 			Log.i("here we go...methinks",putUrl);
-			Log.i("aspdf",convoStr);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -100,7 +98,7 @@ public class ConvoActivity extends ActionBarActivity {
 	public void sendMessage(View v){
 		Log.i("TESt JSON Stuff",convo.getId()+" "+convo.getRev()+" "+convo.getUser1()+" "+ convo.getMostRecentMessage());
 		EditText messageET = (EditText) findViewById(R.id.newmsg);
-		String newMsg = "\""+messageET.getText().toString()+"\"";
+		String newMsg = messageET.getText().toString();
 		putMessage(newMsg);
 		adapter.notifyDataSetChanged();
 	}

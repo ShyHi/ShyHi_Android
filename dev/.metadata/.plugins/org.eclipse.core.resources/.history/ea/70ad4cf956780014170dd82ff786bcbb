@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,10 +32,11 @@ public class conversationsAdapter extends ArrayAdapter<Convo>{
 			TextView recentMsg = (TextView) rowView.findViewById(R.id.recentMsg);
 			
 			SharedPreferences userInfo = context.getSharedPreferences("dev.rug.shyhi",context.MODE_PRIVATE);
-			String userID = userInfo.getString("user_id","");
-			Log.i("THe UserID:",userID);
+			String userID = "";
+			userInfo.getString("user_id",userID);
 			//set the textviews by accessing convo object
-			convoWith.setText(itemsArrayList.get(position).getOtherUser(userID));
+			
+			convoWith.setText(itemsArrayList.get(position).getUser1());
 			recentMsg.setText(itemsArrayList.get(position).getMostRecentMessage());
 			
 				return rowView;
