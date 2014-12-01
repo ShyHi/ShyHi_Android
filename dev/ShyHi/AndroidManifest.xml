@@ -12,17 +12,12 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@drawable/ic_launcher"
+        android:icon="@drawable/shyhi_logo"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
             android:name=".ConversationsActivity"
             android:label="@string/title_activity_conversations" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".ConvoActivity"
@@ -31,6 +26,19 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="dev.rug.shyhi.ConversationsActivity" />
+        </activity>
+        <activity
+            android:name=".HomeScreen"
+            android:label="Shy Hi" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".ProgressPage"
+            android:label="@string/title_activity_progress_page" >
         </activity>
     </application>
 
