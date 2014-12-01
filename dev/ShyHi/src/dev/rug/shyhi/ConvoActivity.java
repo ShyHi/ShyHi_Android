@@ -104,6 +104,7 @@ public class ConvoActivity extends ActionBarActivity {
 			String newMsg = "\""+messageET.getText().toString()+"\"";
 			putMessage(newMsg);
 			adapter.notifyDataSetChanged();
+			messageET.setText("");
 		}
 	}
 	public class putJSONAsync extends AsyncTask<Object, Void, Void> {
