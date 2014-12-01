@@ -82,12 +82,11 @@ View Business Model Canvas: **working on new iteration, link will be here shortl
 
 ####Application Development Status and Goals:
 
-Last Achieved Goal: RestUtils now returns JSON objects, Custom ListViews completed in first iteration
+Last Achieved Goal: Messages Post to CouchDB Server
 
-Next Goals: Complete RestUtils handling JSON to POJO(Plain old Java Object) via GSON library
+Next Goals: Unique User IDs
+            New Conversation Functionaloty
             Location Services
-            Messaging updating
-            Message ListView & Threading
 
 
 ###Application Infrastructure & Design
