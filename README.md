@@ -36,7 +36,29 @@ Check out our forum to communicate with other contributors and to find support: 
 * Location based, only chat with those around you, easier to discuss the weather this way
 * Anonymous, because we're all to shy to talk to a stranger face to face
 * No log ins, accounts, nothing
-  
+
+###How To Install
+================
+* Download and install the [Android SDK and Eclipse ADT](https://developer.android.com/sdk/index.html?hl=i#download)
+* Import project into eclipse workspace
+  * Right click in the package explorer and choose Import
+  * Choose Android > Existing Android Code into Workspace 
+  * Locate ShyHi folder and click OK
+* Check the box thats says 'copy projects into workspace'
+* Right click on the ShyHi folder and go to Properties, then go to the Java Build Path tab
+* Click on Libraries > Add JARs
+* Locate and find android-support-v4 and android-support-v7 (make sure android-support-v7-appcompat is in your workspace)
+
+####Common Errors
+* If you are getting the 'R cannot be resolved to a variable' error
+  * Right click on the ShyHi folder and go to properties
+  * Click on the Android tab
+  * Click on the add button in the Library section
+  * Choose android-support-v7-appcompat
+* If 'unable to resolve to target android-19' appears 
+  * Right click on the ShyHi folder and go to properties
+  * Click on the Android tab
+  * Check the box next to Android 4.4W and click Apply
 
 ###Development Status
 ==================
