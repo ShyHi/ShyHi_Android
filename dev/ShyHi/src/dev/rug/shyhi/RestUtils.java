@@ -19,6 +19,7 @@ import org.apache.http.StatusLine;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpPut;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
@@ -69,21 +70,19 @@ public class RestUtils {
 		String allConvosStr = "";
 		try {
 			allConvosStr = new fetchJSON().execute("http://104.236.22.60:5984/shyhi/_design/conversation/_view/get_all_convo?key=%22"+key+"%22").get();
+			Log.i("AllConvosStr",allConvosStr);
 			JsonParser jp = new JsonParser();
 			JsonElement convos = jp.parse(allConvosStr);
 			JsonArray convosArr = (JsonArray) convos.getAsJsonObject().get("rows");
-			Log.i("Array",convosArr.toString());
 			for(int i = 0; i < convosArr.size(); ++i){
 				  JsonElement item = convosArr.get(i).getAsJsonObject();
 				  JsonObject convo = (JsonObject) item.getAsJsonObject().get("value");
 				  convoArr.add(getConvoFromJson(convo));
-				  Log.i("convo",convo.toString());
 			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-    	Log.i("getAllConvos",allConvosStr);
     	//turn the allConvosStr into a java object
     	return convoArr;
     }
@@ -98,7 +97,6 @@ public class RestUtils {
 		for(int i = 0; i < msgArr.size(); ++i){
 			Message msg = getMessageFromJson(msgArr.get(i).getAsJsonObject());
 			msgArrList.add(msg);
-			Log.i("MESSAGE ADD",msg.getMessage());
 		}
 		Convo convo = new Convo(convoObj.get("_id").toString(),convoObj.get("_rev").toString(),convoObj.get("user1").toString(),convoObj.get("user2").toString(),msgArrList);
 		return convo;
@@ -110,7 +108,6 @@ public class RestUtils {
 	} 
 	//helper method to get the JSON object
     public String getJSON(String address){
-    	
     	StringBuilder builder = new StringBuilder();
     	HttpClient client = new DefaultHttpClient();
     	HttpGet httpGet = new HttpGet(address);
@@ -139,28 +136,33 @@ public class RestUtils {
     
   //helper method to PUT the JSON object
     public String putJSON(String urlStr, String putStr) throws Exception{ 
-    	/*
-    	URL url = new URL(urlStr);
-    	HttpURLConnection httpCon = (HttpURLConnection) url.openConnection();
-    	httpCon.setDoOutput(true);
-    	httpCon.setRequestMethod("PUT");
-    	OutputStreamWriter out = new OutputStreamWriter(httpCon.getOutputStream());
-    	out.write(putStr);
-    	out.close();
-    	*/
-            HttpClient httpClient = new DefaultHttpClient();
-            HttpResponse response;
-            HttpPut put=new HttpPut();
-            HttpEntity httpEntity;
-            StringEntity stringEntity=new StringEntity(putStr);
-            stringEntity.setContentEncoding(new BasicHeader(HTTP.CONTENT_TYPE, "application/json"));
-            httpEntity=stringEntity;
-            put.setEntity(httpEntity);
-            put.setURI(new URI(urlStr));
-            put.setHeader("Content-type", "application/json");
-            response=httpClient.execute(put);
-            return parseHttpResponse(response);
-            
+        HttpClient httpClient = new DefaultHttpClient();
+        HttpResponse response;
+        HttpPut put=new HttpPut();
+        HttpEntity httpEntity;
+        StringEntity stringEntity=new StringEntity(putStr);
+        stringEntity.setContentEncoding(new BasicHeader(HTTP.CONTENT_TYPE, "application/json"));
+        httpEntity=stringEntity;
+        put.setEntity(httpEntity);
+        put.setURI(new URI(urlStr));
+        put.setHeader("Content-type", "application/json");
+        response=httpClient.execute(put);
+        return parseHttpResponse(response);          
+     }
+    
+    public String postJSON(String urlStr, String putStr) throws Exception{ 
+        HttpClient httpClient = new DefaultHttpClient();
+        HttpResponse response;
+        HttpPost put=new HttpPost();
+        HttpEntity httpEntity;
+        StringEntity stringEntity=new StringEntity(putStr);
+        stringEntity.setContentEncoding(new BasicHeader(HTTP.CONTENT_TYPE, "application/json"));
+        httpEntity=stringEntity;
+        put.setEntity(httpEntity);
+        put.setURI(new URI(urlStr));
+        put.setHeader("Content-type", "application/json");
+        response=httpClient.execute(put);
+        return parseHttpResponse(response);          
      }
     
     public  String parseHttpResponse(HttpResponse response) throws Exception {
@@ -179,7 +181,6 @@ public class RestUtils {
             jsonString = sb.toString();
             bReader.close();
         } 
-        Log.i("HTTP Stuff",jsonString);
         return jsonString;
          
     }

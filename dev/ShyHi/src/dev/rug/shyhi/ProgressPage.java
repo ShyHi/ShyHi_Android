@@ -46,4 +46,12 @@ public class ProgressPage extends ActionBarActivity {
 		}
 		return super.onOptionsItemSelected(item);
 	}
+	
+	public void newConvo(){
+		/*call server, 
+		 	server should determine a user to chat with
+			server should create and return the document
+			app should create the new convo and send intent to start it
+		*/
+	}
 }

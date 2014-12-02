@@ -8,7 +8,6 @@ public class Convo {
 
 	private String _id;
 	private String _rev;
-	private String type;
 	private String user1;
 	private String user2;
 	private ArrayList<Message> messages;
@@ -36,9 +35,6 @@ public class Convo {
 	public String getRev(){
 		return _rev;
 	}
-	public String getType(){
-		return type;
-	}
 	public String getUser1(){
 		return user1;
 	}
@@ -47,11 +43,9 @@ public class Convo {
 	}
 	public String getOtherUser(String user){
 		if(getUser1().equals(user)){
-			Log.i("retUser",getUser2());
 			return getUser2();
 		}
 		else{
-			Log.i("retUser",getUser1());
 			return getUser1();
 		}
 	}
@@ -65,6 +59,10 @@ public class Convo {
 	
 	public String getMostRecentMessage(){
 		return messages.get(messages.size()-1).getMessage();
+	}
+	
+	public String getMostRecentTime(){
+		return messages.get(messages.size()-1).getTimestamp();
 	}
 	public String getMsgsStr(){
 		ArrayList<Message> msgs = getMessages();

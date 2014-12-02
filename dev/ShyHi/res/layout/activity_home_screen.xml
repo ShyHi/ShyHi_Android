@@ -41,8 +41,9 @@
             android:textSize="23sp" 
             android:textColor="#FFFFFF"
             android:layout_marginTop="15sp"
-            android:background="@drawable/new_chat_button"
             android:onClick="myButtonClickMethod"/>
+                    <!-- android:background="new_chat_button" -->
+        
 
         <Button
             android:id="@+id/myConvo"
@@ -52,9 +53,9 @@
              android:textSize="23sp" 
             android:textColor="#FFFFFF"
             android:layout_marginTop="5sp"
-            android:background="@drawable/new_chat_button"
             android:onClick="myButtonClickMethod" />
-
+	           <!-- android:background="@drawable/new_chat_button" -->
+        
     </LinearLayout>
 
 </LinearLayout>

@@ -4,6 +4,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -27,7 +28,9 @@ public class HomeScreen extends ActionBarActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_home_screen);
-		
+		Installation installation = new Installation();
+		installation.id(getApplicationContext());
+		Log.i("USER ID",installation.getUUID());
 		logo = (ImageView)findViewById(R.id.imageView1);
 		description = (TextView)findViewById(R.id.textView1);
 		newChat = (Button)findViewById(R.id.button1);	
