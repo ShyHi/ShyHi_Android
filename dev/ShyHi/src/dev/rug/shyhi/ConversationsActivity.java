@@ -24,30 +24,20 @@ import android.widget.TextView;
 public class ConversationsActivity extends ActionBarActivity {
 	
 	private ArrayList<Convo> convos;
-	private conversationsAdapter adapter;
+	private CustomConvoAdapter adapter;
+	private Installation installation = new Installation();
 
-	private String userID;
+	private String userID = installation.getUUID();
 	RestUtils restUtil = new RestUtils(); 
-	SharedPreferences userInfo = null;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_conversations);
-		userInfo = getSharedPreferences("dev.rug.shyhi",MODE_PRIVATE);
-	}
-	@Override
-	protected void onResume(){
-		super.onResume();
-		if(userInfo.getBoolean("firstRun", true)){
-            userInfo.edit().putBoolean("firstrun", false).commit();
-            SharedPreferences.Editor editor = userInfo.edit();
-            editor.putString("user_id", "user1"); //need to add a UUID somehow
-            editor.commit();
-		}
-		Log.i("STRING",userInfo.getString("user_id",""));
-		convos = restUtil.getAllConvos("user1");
+		Log.i("User Id in Convo",userID);
+
+		convos = restUtil.getAllConvos(userID);
 		// pass context and data to the custom adapter
-	    adapter = new conversationsAdapter(this, convos);
+	    adapter = new CustomConvoAdapter(this, convos);
 		ListView lv = (ListView)findViewById(R.id.shysList);	
 	    //setListAdapter
 	    lv.setAdapter(adapter);
@@ -60,6 +50,11 @@ public class ConversationsActivity extends ActionBarActivity {
 				startActivity(intent);
 			}
 		});
+	}
+	@Override
+	protected void onResume(){
+		super.onResume();
+		adapter.notifyDataSetChanged();
 	}
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {

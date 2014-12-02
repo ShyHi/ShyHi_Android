@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -19,18 +20,18 @@ public class CustomConvoAdapter extends BaseAdapter implements OnClickListener{
 	
 	
 	private Activity activity;
-	private ArrayList convos; 
+	private ArrayList<Convo> convos; 
 	private static LayoutInflater inflater = null; 
 	public Resources res;
 	Convo tempValues = null;
 	int i = 0;									//Declared necessary variables
 	
 	//Custom Adapter Constructor
-	public void CustomAdapter(Activity a, ArrayList d, Resources resLocal)
+	public CustomConvoAdapter(Activity a, ArrayList<Convo> d)/*, Resources resLocal)*/
 	{
 		activity = a;
 		convos = d;
-		res = resLocal;							//Reassign past values
+		//res = resLocal;							//Reassign past values
 		
 		//Layout inflater to call xml
 		inflater = (LayoutInflater)activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE); 
@@ -74,14 +75,14 @@ public class CustomConvoAdapter extends BaseAdapter implements OnClickListener{
 		if(convertView == null)
 		{
 			//Inflate listview with each row
-			vi = inflater.inflate(R.layout.activity_conversations, null);
+			vi = inflater.inflate(R.layout.convo_custom_layout, null);
 			
 			//View Holder to contain elements
 			holder = new ViewHolder();
 			holder.anonNumber = (TextView)vi.findViewById(R.id.textView1);
 			holder.onlineStatus = (ImageView)vi.findViewById(R.id.imageView1);
-			holder.convoText = (TextView)vi.findViewById(R.id.textView2);
-			holder.textDate = (TextView)vi.findViewById(R.id.textView3);
+			holder.convoText = (TextView)vi.findViewById(R.id.textView3);
+			holder.textDate = (TextView)vi.findViewById(R.id.textView2);
 			
 			//Set holder with inflater
             vi.setTag( holder );
@@ -100,16 +101,16 @@ public class CustomConvoAdapter extends BaseAdapter implements OnClickListener{
             //Get each model object 
             tempValues=null;
             tempValues = (Convo)convos.get( position );
-             
-            
+    		Installation installation = new Installation();
+    		String thisUser = installation.getUUID();
             //Sets model values
-            holder.anonNumber.setText(tempValues.getUser2());	//Is this the anon#? 
+            holder.anonNumber.setText(tempValues.getOtherUser(thisUser));	//Is this the anon#? 
             holder.convoText.setText(tempValues.getMostRecentMessage());
-            holder.textDate.setText(tempValues.getId());				//What valuue in Convo class represents the text date?
-            holder.onlineStatus.setImageResource(
-            		res.getIdentifier(
-            				"dev.rug.shyhi:drawable/online"
-            				,null,null));
+            holder.textDate.setText(tempValues.getMostRecentTime());
+           // holder.onlineStatus.setImageResource(
+            		//res.getIdentifier(
+            				//"dev.rug.shyhi:drawable/online"
+            				//,null,null));
         }
         return vi;
     }
