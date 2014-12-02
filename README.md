@@ -7,8 +7,7 @@ Location based anonymous messaging application. It's like heroin for your connec
 ![alt tag](https://raw.github.com/ChapmanCPSC370/ShyHi/master/misc/shyHi2.png)
 ![alt tag](https://raw.github.com/ChapmanCPSC370/ShyHi/master/misc/shyHi3.png)
 
-![alt tag](https://raw.github.com/ChapmanCPSC370/ShyHi/master/Videos/What\ is\ ShyHi.mov)
-
+[![What is ShyHi?](http://img.youtube.com/vi/poksBjqQLPg/0.jpg)](http://youtu.be/poksBjqQLPg)
 Checkout the [awesome landing page](http://chapmancpsc370.github.io/ShyHi/)
 
 ###Mission Statement: 
