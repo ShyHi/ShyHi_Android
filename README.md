@@ -7,7 +7,7 @@ Location based anonymous messaging application. It's like heroin for your connec
 ![alt tag](https://raw.github.com/ChapmanCPSC370/ShyHi/master/misc/shyHi2.png)
 ![alt tag](https://raw.github.com/ChapmanCPSC370/ShyHi/master/misc/shyHi3.png)
 
-
+![alt tag](https://raw.github.com/ChapmanCPSC370/ShyHi/master/Videos/What\ is\ ShyHi.mov)
 
 Checkout the [awesome landing page](http://chapmancpsc370.github.io/ShyHi/)
 
@@ -39,6 +39,9 @@ Check out our forum to communicate with other contributors and to find support: 
 
 ###How To Install
 ================
+![alt tag](https://raw.github.com/ChapmanCPSC370/ShyHi/master/Videos/How\ to\ Install\ ShyHi.mp4)
+
+
 * Download and install the [Android SDK and Eclipse ADT](https://developer.android.com/sdk/index.html?hl=i#download)
 * Import project into eclipse workspace
   * Right click in the package explorer and choose Import
