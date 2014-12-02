@@ -5,9 +5,9 @@ Location based anonymous messaging application. It's like heroin for your connec
 
 ![alt tag](https://raw.github.com/ChapmanCPSC370/ShyHi/master/misc/shyHi1.png)
 ![alt tag](https://raw.github.com/ChapmanCPSC370/ShyHi/master/misc/shyHi2.png)
-![alt tag](https://raw.github.com/ChapmanCPSC370/ShyHi/master/misc/shyHi3.png)
+![alt tag](https://raw.githubusercontent.com/ChapmanCPSC370/ShyHi/master/misc/shyHi3.png)
 
-
+[What is Shyhi?](http://youtu.be/poksBjqQLPg)
 
 Checkout the [awesome landing page](http://chapmancpsc370.github.io/ShyHi/)
 
@@ -39,6 +39,8 @@ Check out our forum to communicate with other contributors and to find support: 
 
 ###How To Install
 ================
+[How to Install ShyHi](http://youtu.be/b8BHmA76tuc)
+
 * Download and install the [Android SDK and Eclipse ADT](https://developer.android.com/sdk/index.html?hl=i#download)
 * Import project into eclipse workspace
   * Right click in the package explorer and choose Import
@@ -82,12 +84,11 @@ View Business Model Canvas: **working on new iteration, link will be here shortl
 
 ####Application Development Status and Goals:
 
-Last Achieved Goal: RestUtils now returns JSON objects, Custom ListViews completed in first iteration
+Last Achieved Goal: Messages Post to CouchDB Server
 
-Next Goals: Complete RestUtils handling JSON to POJO(Plain old Java Object) via GSON library
+Next Goals: Unique User IDs
+            New Conversation Functionaloty
             Location Services
-            Messaging updating
-            Message ListView & Threading
 
 
 ###Application Infrastructure & Design
