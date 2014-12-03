@@ -76,6 +76,9 @@ public class Convo {
 		}
 		return retStr;
 	}
+	public void setRev(String rev){
+		_rev = "\""+rev+"\""; 
+	}
 	public String toStringForPut(){
 		String convoStr = "{"+"\"_id\":"+getId()+","+
 				"\"_rev\":"+getRev()+","+

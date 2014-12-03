@@ -33,8 +33,6 @@ public class ConversationsActivity extends ActionBarActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_conversations);
-		Log.i("User Id in Convo",userID);
-
 		convos = restUtil.getAllConvos(userID);
 		// pass context and data to the custom adapter
 	    adapter = new CustomConvoAdapter(this, convos);

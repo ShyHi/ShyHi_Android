@@ -25,6 +25,8 @@ import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicHeader;
 import org.apache.http.protocol.HTTP;
+import org.apache.http.util.EntityUtils;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -70,7 +72,6 @@ public class RestUtils {
 		String allConvosStr = "";
 		try {
 			allConvosStr = new fetchJSON().execute("http://104.236.22.60:5984/shyhi/_design/conversation/_view/get_all_convo?key=%22"+key+"%22").get();
-			Log.i("AllConvosStr",allConvosStr);
 			JsonParser jp = new JsonParser();
 			JsonElement convos = jp.parse(allConvosStr);
 			JsonArray convosArr = (JsonArray) convos.getAsJsonObject().get("rows");
@@ -136,7 +137,8 @@ public class RestUtils {
     
   //helper method to PUT the JSON object
     public String putJSON(String urlStr, String putStr) throws Exception{ 
-        HttpClient httpClient = new DefaultHttpClient();
+        Log.i("putStr",putStr);
+    	HttpClient httpClient = new DefaultHttpClient();
         HttpResponse response;
         HttpPut put=new HttpPut();
         HttpEntity httpEntity;
@@ -166,23 +168,12 @@ public class RestUtils {
      }
     
     public  String parseHttpResponse(HttpResponse response) throws Exception {
-        String jsonString="";
         int status = response.getStatusLine().getStatusCode();
         Log.i("Status",Integer.toString(status));
-        if (status == 200) {
-            BufferedReader bReader = new BufferedReader(new InputStreamReader(
-                    response.getEntity().getContent()));
-            StringBuffer sb = new StringBuffer("");
-            String line = "";
-            String NL = System.getProperty("line.separator");
-            while ((line = bReader.readLine()) != null) {
-                sb.append(line + NL);
-            }
-            jsonString = sb.toString();
-            bReader.close();
-        } 
-        return jsonString;
-         
+        String jsonString = EntityUtils.toString(response.getEntity());     
+        Log.i("jsonString",jsonString);
+        JSONObject result = new JSONObject(jsonString); //Convert String to JSON Object
+        return result.getString("rev"); //return new rev   
     }
 	//helper AsyncTask class
 	private class fetchJSON extends AsyncTask<String, Integer, String> {
