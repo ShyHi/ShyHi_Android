@@ -3,8 +3,10 @@ package dev.rug.shyhi;
 import java.util.ArrayList;
 
 import android.support.v7.app.ActionBarActivity;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -27,18 +29,20 @@ public class ConvoActivity extends ActionBarActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_conversation);
 		//get convo id, which will be passed as an intent extra
-	}
-
-	@Override
-	protected void onResume(){
-		super.onResume();	
-		convo = restUtil.getConvoById(userID);
-		// pass context and data to the custom adapter
+		Intent intent = getIntent();
+		convo = restUtil.getConvoById(intent.getStringExtra("idExtra"));
 		messages = convo.getMessages();
+		// pass context and data to the custom adapter
 	    adapter = new convoAdapter(this, messages);
 		ListView lv = (ListView)findViewById(R.id.msgsLv);	
 	    //setListAdapter
 	    lv.setAdapter(adapter);
+	}
+
+	@Override
+	protected void onResume(){
+		super.onResume();			
+		adapter.notifyDataSetChanged();
 	}
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -95,7 +99,8 @@ public class ConvoActivity extends ActionBarActivity {
 	            String url = (String) params[0];
 	            String putStr = (String) params[1];
 	            try {
-					restUtil.putJSON(url,putStr);
+					convo.setRev(restUtil.putJSON(url,putStr));
+					Log.i("Rev set",convo.getRev());
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
