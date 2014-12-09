@@ -4,36 +4,54 @@ import java.util.UUID;
 
 public class User {
 	
-	private UUID userID;
-	private double latitude;
-	private double longitude;
+	private String _id;
+	private String _rev;
+	private String latitude;
+	private String longitude;
 	
 	public User(){};
-	public User(UUID u, double la, double lo){
-		userID = u;
+	public User(String u, String la, String lo){
+		_id = u;
+		latitude = la;
+		longitude = lo;
+		_rev = "";
+	}
+	public User(String u, String r, String la, String lo){
+		_id = u;
 		latitude = la;
 		longitude = lo;
 	}
 	
-	public UUID getID(){
-		return userID;
+	public String getID(){
+		return _id;
 	}
-	
-	public double getLat(){
+	public String getRev(){
+		return _rev;
+	}
+	public String getLat(){
 		return latitude;
 	}
 	
-	public double getLong(){
+	public String getLong(){
 		return longitude;
 	}
 	
-	public void setLat(Double l){
+	public void setLat(String l){
 		latitude = l;
 	}
-	public void setLong(Double l){
+	public void setLong(String l){
 		longitude = l;
 	}
-	public void setID(UUID u){
-		userID = u;
+	public void setID(String u){
+		_id = u;
 	}
+	public String getUserForPost(){
+		String userStr = "{"+"\"_id\":"+getID()+","+
+			"\"_rev\":"+getRev()+","+
+			"\"type\":"+"\"user\","+
+			"\"latitude\":"+getLat()+","+
+			"\"longitude\":"+getLong()+"}";
+	return userStr;				
+}
+	
 }

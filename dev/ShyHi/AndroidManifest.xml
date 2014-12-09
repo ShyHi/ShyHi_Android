@@ -38,7 +38,11 @@
         </activity>
         <activity
             android:name=".ProgressPage"
-            android:label="@string/title_activity_progress_page" >
+            android:label="@string/title_activity_progress_page" 
+            android:parentActivityName=".HomeScreen" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="dev.rug.shyhi.HomeScreen" />
         </activity>
     </application>
 
