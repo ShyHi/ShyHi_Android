@@ -55,9 +55,9 @@ public class Installation {
 	    @Override
 	    protected Void doInBackground(Object... params) {
 	            String url = (String) params[0];
-	            String putStr = (String) params[1];
+	            String postStr = (String) params[1];
 	            try {
-					restUtils.postJSON(url,putStr);
+					restUtils.putJSON(url,postStr,1);
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
