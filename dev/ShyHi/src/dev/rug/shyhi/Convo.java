@@ -1,6 +1,7 @@
 package dev.rug.shyhi;
 
 import java.util.ArrayList;
+import java.util.UUID;
 
 import android.util.Log;
 
@@ -20,6 +21,13 @@ public class Convo {
 		user1 = u1;
 		user2 = u2;
 		messages = m;
+	}
+	public Convo(String cId, String u1, String u2){
+		_id = cId;
+		_rev = "";
+		user1 = u1;
+		user2 = u2;
+		messages = new ArrayList<Message>();
 	}
 	public Convo(String i, String r, String u1, String u2, ArrayList<Message> m){
 		_id = i;
@@ -49,8 +57,14 @@ public class Convo {
 			return getUser1();
 		}
 	}
+	public Boolean hasMessages(){
+		if(messages.isEmpty())
+			return false;
+		else
+			return true;
+	}
 	public ArrayList<Message> getMessages(){
-		return messages;
+			return messages;
 	}
 	
 	public void addMessage(Message m){
@@ -58,11 +72,17 @@ public class Convo {
 	}
 	
 	public String getMostRecentMessage(){
-		return messages.get(messages.size()-1).getMessage();
+		if(hasMessages())
+			return messages.get(messages.size()-1).getMessage();
+		else
+			return "";
 	}
 	
 	public String getMostRecentTime(){
-		return messages.get(messages.size()-1).getTimestamp();
+		if(hasMessages())
+			return messages.get(messages.size()-1).getTimestamp();
+		else
+			return "";
 	}
 	public String getMsgsStr(){
 		ArrayList<Message> msgs = getMessages();

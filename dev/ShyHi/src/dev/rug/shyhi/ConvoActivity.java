@@ -22,16 +22,18 @@ public class ConvoActivity extends ActionBarActivity {
 	private String userID = installation.getUUID();
 	private ArrayList<Message> messages;
 	private convoAdapter adapter = null;
-
-	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_conversation);
 		//get convo id, which will be passed as an intent extra
 		Intent intent = getIntent();
-		convo = restUtil.getConvoById(intent.getStringExtra("idExtra"));
-		messages = convo.getMessages();
+		String intentID = intent.getStringExtra("idExtra");
+		convo = restUtil.getConvoById(intentID);
+		if(convo.hasMessages())
+			messages = convo.getMessages();
+		else
+			messages = new ArrayList<Message>();
 		// pass context and data to the custom adapter
 	    adapter = new convoAdapter(this, messages);
 		ListView lv = (ListView)findViewById(R.id.msgsLv);	
@@ -41,7 +43,8 @@ public class ConvoActivity extends ActionBarActivity {
 
 	@Override
 	protected void onResume(){
-		super.onResume();			
+		super.onResume();
+		
 		adapter.notifyDataSetChanged();
 	}
 	@Override
@@ -65,7 +68,7 @@ public class ConvoActivity extends ActionBarActivity {
 	
 	public void putMessage(String msg){
 		String otherUser;
-		if(convo.getUser1().equals(userID)){
+		if(convo.getUser1().equals("\""+userID+"\"")){
 			otherUser = convo.getUser2();
 		}
 		else{
@@ -81,6 +84,14 @@ public class ConvoActivity extends ActionBarActivity {
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}
+		if(messages.isEmpty()){
+			messages = convo.getMessages();
+			adapter = null;
+			adapter = new convoAdapter(this, messages);
+			ListView lv = (ListView)findViewById(R.id.msgsLv);	
+		    //setListAdapter
+		    lv.setAdapter(adapter);
 		}
 	}
 	
@@ -99,8 +110,7 @@ public class ConvoActivity extends ActionBarActivity {
 	            String url = (String) params[0];
 	            String putStr = (String) params[1];
 	            try {
-					convo.setRev(restUtil.putJSON(url,putStr));
-					Log.i("Rev set",convo.getRev());
+					convo.setRev(restUtil.putJSON(url,putStr,1));
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();

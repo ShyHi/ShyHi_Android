@@ -11,6 +11,7 @@ import java.net.URI;
 import java.net.URL;
 import java.security.Timestamp;
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.concurrent.ExecutionException;
 
 import org.apache.http.HttpEntity;
@@ -46,7 +47,6 @@ public class RestUtils {
 
 	public RestUtils(){};
 	
-	//It works!
 	public Convo getConvoById(String convoID){
 		//String convoStr = 
     	String convoStr = "";
@@ -55,10 +55,16 @@ public class RestUtils {
 			convoStr = new fetchJSON().execute("http://104.236.22.60:5984/shyhi/_design/conversation/_view/get_convo?key=%22"+convoID+"%22").get();
 			JsonParser jp = new JsonParser();
 			JsonElement convoJ = jp.parse(convoStr);
-			JsonArray convoRow = (JsonArray) convoJ.getAsJsonObject().get("rows");
-			JsonElement item = convoRow.get(0).getAsJsonObject();
-			JsonObject convoJSON = (JsonObject) item.getAsJsonObject().get("value");
-			convo = getConvoFromJson(convoJSON);
+			if(!convoJ.getAsJsonObject().get("rows").isJsonNull()){
+				JsonArray convoRow = (JsonArray) convoJ.getAsJsonObject().get("rows");
+				JsonElement item = convoRow.get(0).getAsJsonObject();
+				JsonObject convoJSON = (JsonObject) item.getAsJsonObject().get("value");
+				convo = getConvoFromJson(convoJSON);
+			}
+			else{
+				convo = new Convo();
+			}
+			
 		}catch(Exception e){
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -93,16 +99,42 @@ public class RestUtils {
 	}
 	
 	public Convo getConvoFromJson(JsonObject convoObj){
-		JsonArray msgArr = (JsonArray)convoObj.getAsJsonObject().get("messages");
 		ArrayList<Message> msgArrList = new ArrayList<Message>();
+		if(convoObj.getAsJsonObject().get("messages").isJsonArray()){
+			JsonArray msgArr = (JsonArray)convoObj.getAsJsonObject().get("messages");
 		for(int i = 0; i < msgArr.size(); ++i){
 			Message msg = getMessageFromJson(msgArr.get(i).getAsJsonObject());
 			msgArrList.add(msg);
+		}
 		}
 		Convo convo = new Convo(convoObj.get("_id").toString(),convoObj.get("_rev").toString(),convoObj.get("user1").toString(),convoObj.get("user2").toString(),msgArrList);
 		return convo;
 	}
 	
+	public String getRandomUserID(String thisUser){
+		String allUsers = "";
+		String userRet = "";
+		ArrayList<String> allUserIDs = new ArrayList<String>();
+		try {
+			allUsers = new fetchJSON().execute("http://104.236.22.60:5984/shyhi/_design/users/_view/getAllUserIds").get();
+			JsonParser jp = new JsonParser();
+			JsonElement users = jp.parse(allUsers);
+			JsonArray usersArr = (JsonArray) users.getAsJsonObject().get("rows");
+			for(int i = 0; i < usersArr.size(); ++i){
+				  JsonObject item = usersArr.get(i).getAsJsonObject();
+				  allUserIDs.add(item.get("key").toString());
+			}
+			userRet = getRandUser(thisUser,allUserIDs);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ExecutionException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return userRet;
+
+	}
 	public Message getMessageFromJson(JsonObject msgObj){
 		Message msg = new Message(msgObj.get("to").toString(),msgObj.get("from").toString(),msgObj.get("timestamp").toString(),msgObj.get("message").toString());
 		return msg;
@@ -136,8 +168,7 @@ public class RestUtils {
     }
     
   //helper method to PUT the JSON object
-    public String putJSON(String urlStr, String putStr) throws Exception{ 
-        Log.i("putStr",putStr);
+    public String putJSON(String urlStr, String putStr, int revID) throws Exception{ 
     	HttpClient httpClient = new DefaultHttpClient();
         HttpResponse response;
         HttpPut put=new HttpPut();
@@ -149,31 +180,37 @@ public class RestUtils {
         put.setURI(new URI(urlStr));
         put.setHeader("Content-type", "application/json");
         response=httpClient.execute(put);
-        return parseHttpResponse(response);          
+        return parseHttpResponse(response,revID);          
      }
     
-    public String postJSON(String urlStr, String putStr) throws Exception{ 
-        HttpClient httpClient = new DefaultHttpClient();
+    public String postJSON(String urlStr, String postStr) throws Exception{ 
+    	HttpClient httpClient = new DefaultHttpClient();
         HttpResponse response;
-        HttpPost put=new HttpPost();
+        HttpPost post=new HttpPost();
         HttpEntity httpEntity;
-        StringEntity stringEntity=new StringEntity(putStr);
-        stringEntity.setContentEncoding(new BasicHeader(HTTP.CONTENT_TYPE, "application/json"));
+        StringEntity stringEntity=new StringEntity(postStr);
         httpEntity=stringEntity;
-        put.setEntity(httpEntity);
-        put.setURI(new URI(urlStr));
-        put.setHeader("Content-type", "application/json");
-        response=httpClient.execute(put);
-        return parseHttpResponse(response);          
+        post.setEntity(httpEntity);
+        post.setURI(new URI(urlStr));
+        post.setHeader("Accept", "application/json");
+        post.setHeader("Content-type", "application/json");
+        response=httpClient.execute(post);
+        return parseHttpResponse(response, 0);          
      }
     
-    public  String parseHttpResponse(HttpResponse response) throws Exception {
+    public  String parseHttpResponse(HttpResponse response,int revID) throws Exception {
         int status = response.getStatusLine().getStatusCode();
-        Log.i("Status",Integer.toString(status));
         String jsonString = EntityUtils.toString(response.getEntity());     
-        Log.i("jsonString",jsonString);
         JSONObject result = new JSONObject(jsonString); //Convert String to JSON Object
-        return result.getString("rev"); //return new rev   
+        if(revID == 1){
+        	if(result.has("rev"))
+        		return result.getString("rev"); //return new rev  
+        }
+        else{
+        	return result.getString("id");
+        }
+        return "";
+        
     }
 	//helper AsyncTask class
 	private class fetchJSON extends AsyncTask<String, Integer, String> {
@@ -188,4 +225,13 @@ public class RestUtils {
         }
     }
 	
+	private String getRandUser(String thisUser, ArrayList<String> strArr){
+		Random rand = new Random();
+	    int randomNum = rand.nextInt(strArr.size());
+	    String randId = strArr.get(randomNum);
+	    if(randId.equals(thisUser)){
+	    	getRandUser(thisUser,strArr);
+	    }
+	    return randId;
+	}
 }

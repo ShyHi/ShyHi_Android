@@ -13,8 +13,11 @@
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="false" key="wholeword"/>
-		<item value="Log" key="selection"/>
+		<item value="UUID" key="selection"/>
 		<list key="findhistory">
+			<item value="UUID"/>
+			<item value="putJso"/>
+			<item value="fetc"/>
 			<item value="Log"/>
 			<item value="log"/>
 			<item value="ConvoLis"/>

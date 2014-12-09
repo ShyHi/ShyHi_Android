@@ -29,9 +29,12 @@ public class ConversationsActivity extends ActionBarActivity {
 
 	private String userID = installation.getUUID();
 	RestUtils restUtil = new RestUtils(); 
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		Log.i("User id is:",userID);
+
 		setContentView(R.layout.activity_conversations);
 		convos = restUtil.getAllConvos(userID);
 		// pass context and data to the custom adapter
@@ -52,6 +55,8 @@ public class ConversationsActivity extends ActionBarActivity {
 	@Override
 	protected void onResume(){
 		super.onResume();
+		convos = restUtil.getAllConvos(userID);
+
 		adapter.notifyDataSetChanged();
 	}
 	@Override
