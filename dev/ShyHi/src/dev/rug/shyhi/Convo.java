@@ -1,6 +1,7 @@
 package dev.rug.shyhi;
 
 import java.util.ArrayList;
+import java.util.UUID;
 
 import android.util.Log;
 
@@ -8,7 +9,6 @@ public class Convo {
 
 	private String _id;
 	private String _rev;
-	private String type;
 	private String user1;
 	private String user2;
 	private ArrayList<Message> messages;
@@ -21,6 +21,13 @@ public class Convo {
 		user1 = u1;
 		user2 = u2;
 		messages = m;
+	}
+	public Convo(String cId, String u1, String u2){
+		_id = cId;
+		_rev = "";
+		user1 = u1;
+		user2 = u2;
+		messages = new ArrayList<Message>();
 	}
 	public Convo(String i, String r, String u1, String u2, ArrayList<Message> m){
 		_id = i;
@@ -36,9 +43,6 @@ public class Convo {
 	public String getRev(){
 		return _rev;
 	}
-	public String getType(){
-		return type;
-	}
 	public String getUser1(){
 		return user1;
 	}
@@ -47,16 +51,20 @@ public class Convo {
 	}
 	public String getOtherUser(String user){
 		if(getUser1().equals(user)){
-			Log.i("retUser",getUser2());
 			return getUser2();
 		}
 		else{
-			Log.i("retUser",getUser1());
 			return getUser1();
 		}
 	}
+	public Boolean hasMessages(){
+		if(messages.isEmpty())
+			return false;
+		else
+			return true;
+	}
 	public ArrayList<Message> getMessages(){
-		return messages;
+			return messages;
 	}
 	
 	public void addMessage(Message m){
@@ -64,7 +72,17 @@ public class Convo {
 	}
 	
 	public String getMostRecentMessage(){
-		return messages.get(messages.size()-1).getMessage();
+		if(hasMessages())
+			return messages.get(messages.size()-1).getMessage();
+		else
+			return "";
+	}
+	
+	public String getMostRecentTime(){
+		if(hasMessages())
+			return messages.get(messages.size()-1).getTimestamp();
+		else
+			return "";
 	}
 	public String getMsgsStr(){
 		ArrayList<Message> msgs = getMessages();
@@ -77,6 +95,9 @@ public class Convo {
 		
 		}
 		return retStr;
+	}
+	public void setRev(String rev){
+		_rev = "\""+rev+"\""; 
 	}
 	public String toStringForPut(){
 		String convoStr = "{"+"\"_id\":"+getId()+","+
