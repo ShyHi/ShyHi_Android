@@ -8,12 +8,14 @@ import java.util.UUID;
 
 import dev.rug.shyhi.ConvoActivity.putJSONAsync;
 import android.content.Context;
+import android.content.res.Resources;
 import android.os.AsyncTask;
 
 public class Installation {
     private static String sID = null;
     private static final String INSTALLATION = "INSTALLATION";
-    static RestUtils restUtils = new RestUtils();
+    RestUtils restUtils = new RestUtils();
+
     public synchronized static String id(Context context) {
         if (sID == null) {  
             File installation = new File(context.getFilesDir(), INSTALLATION);
@@ -31,7 +33,7 @@ public class Installation {
     }
     private void newUser(String uid){
         User user = new User(sID,"lat", "long");
-		new postJSONAsync().execute("http://104.236.22.60:5984/shyhi/",user.getUserForPost());
+		new postJSONAsync().execute(RestUtils.dev_server_str,user.getUserForPost());
     }
     private static String readInstallationFile(File installation) throws IOException {
         RandomAccessFile f = new RandomAccessFile(installation, "r");

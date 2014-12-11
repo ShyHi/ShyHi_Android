@@ -16,7 +16,7 @@ import android.widget.ListView;
 public class ConvoActivity extends ActionBarActivity {
 
 	private Installation installation = new Installation();
-	public String restUrl = "http://104.236.22.60:5984/shyhi/_design/conversation/_view/get_convo?key=";
+	private String restUrl = RestUtils.get_convo_view_str;
 	RestUtils restUtil = new RestUtils();
 	private Convo convo;
 	private String userID = installation.getUUID();
@@ -79,7 +79,7 @@ public class ConvoActivity extends ActionBarActivity {
 		String convoStr = convo.toStringForPut();
 		try {
 			String idStr = convo.getId().substring(1,convo.getId().length()-1);
-			String putUrl = "http://104.236.22.60:5984/shyhi/"+idStr;
+			String putUrl = getString(R.string.dev_server)+idStr;
 			new putJSONAsync().execute(putUrl,convoStr);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

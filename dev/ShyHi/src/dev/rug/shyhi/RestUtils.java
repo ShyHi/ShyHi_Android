@@ -37,6 +37,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
+import android.content.res.Resources;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.TextView;
@@ -44,7 +45,13 @@ import android.widget.TextView;
 
 //helper utility class for calling rest and getting json objects
 public class RestUtils {
-
+	
+	//this is the dev and testing server IP
+	public static String dev_server_str = "http://104.236.22.60:5984/shyhi/";
+	public static String get_convo_view_str = "http://104.236.22.60:5984/shyhi/_design/conversation/_view/get_convo?key=";
+	public static String get_all_convo_view_str = "http://104.236.22.60:5984/shyhi/_design/conversation/_view/get_all_convo?key="; 
+	public static String get_all_user_ids = "http://104.236.22.60:5984/shyhi/_design/users/_view/getAllUserIds";
+		
 	public RestUtils(){};
 	
 	public Convo getConvoById(String convoID){
@@ -52,7 +59,8 @@ public class RestUtils {
     	String convoStr = "";
     	Convo convo = null;
 		try {
-			convoStr = new fetchJSON().execute("http://104.236.22.60:5984/shyhi/_design/conversation/_view/get_convo?key=%22"+convoID+"%22").get();
+			
+			convoStr = new fetchJSON().execute(get_convo_view_str+"%22"+convoID+"%22").get();
 			JsonParser jp = new JsonParser();
 			JsonElement convoJ = jp.parse(convoStr);
 			if(!convoJ.getAsJsonObject().get("rows").isJsonNull()){
@@ -77,7 +85,7 @@ public class RestUtils {
     	ArrayList<Convo> convoArr = new ArrayList<Convo>();
 		String allConvosStr = "";
 		try {
-			allConvosStr = new fetchJSON().execute("http://104.236.22.60:5984/shyhi/_design/conversation/_view/get_all_convo?key=%22"+key+"%22").get();
+			allConvosStr = new fetchJSON().execute(get_all_convo_view_str+"%22"+key+"%22").get();
 			JsonParser jp = new JsonParser();
 			JsonElement convos = jp.parse(allConvosStr);
 			JsonArray convosArr = (JsonArray) convos.getAsJsonObject().get("rows");
@@ -116,7 +124,7 @@ public class RestUtils {
 		String userRet = "";
 		ArrayList<String> allUserIDs = new ArrayList<String>();
 		try {
-			allUsers = new fetchJSON().execute("http://104.236.22.60:5984/shyhi/_design/users/_view/getAllUserIds").get();
+			allUsers = new fetchJSON().execute(get_all_user_ids).get();
 			JsonParser jp = new JsonParser();
 			JsonElement users = jp.parse(allUsers);
 			JsonArray usersArr = (JsonArray) users.getAsJsonObject().get("rows");
