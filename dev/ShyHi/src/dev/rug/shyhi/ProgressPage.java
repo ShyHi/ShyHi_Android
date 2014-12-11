@@ -99,7 +99,7 @@ public class ProgressPage extends ActionBarActivity {
 			String retJson ="";
 			String postStr = (String) params[0];
 			try {
-				retJson = restUtils.postJSON("http://104.236.22.60:5984/shyhi/", postStr);
+				retJson = restUtils.postJSON(RestUtils.dev_server_str, postStr);
 				return(retJson);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
