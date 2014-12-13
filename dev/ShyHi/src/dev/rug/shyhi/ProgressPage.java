@@ -80,11 +80,16 @@ public class ProgressPage extends ActionBarActivity {
 		String postStr = postJsonObj.toString();
 		String newConvoIdStr = "";
 		try {
-			newConvoIdStr = new convoAsync().execute(postStr).get();
+			String tempStr = new convoAsync().execute(postStr).get();
+			JSONObject jo = new JSONObject(tempStr);
+			newConvoIdStr = jo.getString("id");
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (ExecutionException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (JSONException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
