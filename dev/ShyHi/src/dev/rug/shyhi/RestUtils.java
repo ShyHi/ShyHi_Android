@@ -59,7 +59,6 @@ public class RestUtils {
     	String convoStr = "";
     	Convo convo = null;
 		try {
-			
 			convoStr = new fetchJSON().execute(get_convo_view_str+"%22"+convoID+"%22").get();
 			JsonParser jp = new JsonParser();
 			JsonElement convoJ = jp.parse(convoStr);
@@ -203,7 +202,8 @@ public class RestUtils {
         post.setHeader("Accept", "application/json");
         post.setHeader("Content-type", "application/json");
         response=httpClient.execute(post);
-        return parseHttpResponse(response, 0);          
+       
+        return parseHttpResponse(response, 2);          
      }
     
     public  String parseHttpResponse(HttpResponse response,int revID) throws Exception {
@@ -214,10 +214,10 @@ public class RestUtils {
         	if(result.has("rev"))
         		return result.getString("rev"); //return new rev  
         }
-        else{
+        else if(revID == 0){
         	return result.getString("id");
         }
-        return "";
+        return result.toString();
         
     }
 	//helper AsyncTask class

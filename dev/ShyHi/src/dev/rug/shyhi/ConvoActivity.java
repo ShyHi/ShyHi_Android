@@ -29,6 +29,7 @@ public class ConvoActivity extends ActionBarActivity {
 		//get convo id, which will be passed as an intent extra
 		Intent intent = getIntent();
 		String intentID = intent.getStringExtra("idExtra");
+		Log.i("intentID", intentID);
 		convo = restUtil.getConvoById(intentID);
 		if(convo.hasMessages())
 			messages = convo.getMessages();
