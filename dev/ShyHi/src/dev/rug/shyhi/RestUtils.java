@@ -51,7 +51,9 @@ public class RestUtils {
 	public static String get_convo_view_str = "http://104.236.22.60:5984/shyhi/_design/conversation/_view/get_convo?key=";
 	public static String get_all_convo_view_str = "http://104.236.22.60:5984/shyhi/_design/conversation/_view/get_all_convo?key="; 
 	public static String get_all_user_ids = "http://104.236.22.60:5984/shyhi/_design/users/_view/getAllUserIds";
-		
+	public static String update_all_convos_str = "http://104.236.22.60:5984/shyhi/_changes?feed=continuous&filter=users_convo/all_convos&name=";
+	public static String update_one_convo_str = "http://104.236.22.60:5984/shyhi/_changes?filter=users_convo/one_convo&id=";
+
 	public RestUtils(){};
 	
 	public Convo getConvoById(String convoID){
@@ -146,8 +148,18 @@ public class RestUtils {
 		Message msg = new Message(msgObj.get("to").toString(),msgObj.get("from").toString(),msgObj.get("timestamp").toString(),msgObj.get("message").toString());
 		return msg;
 	} 
+	 public String getUpdateJSON(String key) throws Exception{ 
+	    	HttpClient httpClient = new DefaultHttpClient();
+	        HttpResponse response;
+	        HttpGet get=new HttpGet();
+	        Log.i("URL get: ",update_one_convo_str+"%22"+key+"%22");
+	        get.setURI(new URI(update_one_convo_str+"%22"+key+"%22"));
+	        response=httpClient.execute(get);
+	        return parseHttpResponse(response,2);          
+	     }
+	    
 	//helper method to get the JSON object
-    public String getJSON(String address){
+    public static String getJSON(String address){
     	StringBuilder builder = new StringBuilder();
     	HttpClient client = new DefaultHttpClient();
     	HttpGet httpGet = new HttpGet(address);
@@ -241,5 +253,19 @@ public class RestUtils {
 	    	getRandUser(thisUser,strArr);
 	    }
 	    return randId;
+	}
+	
+	public String getCurrentConvoUpdates(String convoID){
+		return(getJSON(update_all_convos_str+convoID));
+		//should handle updating conversation, probably should actualyl return convo object
+		//should be running in the specific conversatin
+	}
+	
+	public static String getUpdates(String user_id){
+		//curl -X GET "http://104.236.22.60:5984/shyhi/_changes?feed=continuous&filter=users_convo/important&name=a02b5b9b-05a0-4c0c-b946-83e1f28ac2f6"
+		Log.i("JSON update",getJSON(update_all_convos_str+user_id));
+		return "";
+		//should handle updating all convos in the background. Maybe not continuous but polling. Like every 30 sec or min
+		//should be always running
 	}
 }
