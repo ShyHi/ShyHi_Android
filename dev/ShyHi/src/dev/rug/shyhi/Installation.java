@@ -52,7 +52,7 @@ public class Installation {
         out.write(id.getBytes());
         out.close();
     }
-    public String getUUID(){
+    public static String getUUID(){
     	return sID;
     }
     
