@@ -24,6 +24,7 @@ public class CustomConvoAdapter extends BaseAdapter implements OnClickListener{
 	private Context context;
 	private static LayoutInflater inflater = null; 
 	public Resources res;
+	
 	Convo tempValues = null;
 	int i = 0;									//Declared necessary variables
 	//Custom Adapter Constructor
@@ -103,10 +104,14 @@ public class CustomConvoAdapter extends BaseAdapter implements OnClickListener{
     		Installation installation = new Installation();
     		String thisUser = installation.getUUID();
             //Sets model values
-    		holder.anonNumber.setText(randomNameGen.randomName());
-            //holder.anonNumber.setText(tempValues.getOtherUser(thisUser).substring(1, tempValues.getOtherUser(thisUser).length()-1));	//Is this the anon#? 
+    		holder.anonNumber.setText(text);
+            holder.anonNumber.setText(tempValues.getOtherUser(thisUser).substring(1, tempValues.getOtherUser(thisUser).length()-1));	//Is this the anon#? 
             holder.convoText.setText(tempValues.getMostRecentMessage());
             holder.textDate.setText(tempValues.getMostRecentTime());
+           // holder.onlineStatus.setImageResource(
+            		//res.getIdentifier(
+            				//"dev.rug.shyhi:drawable/online"
+            				//,null,null));
         }
         return vi;
     }
