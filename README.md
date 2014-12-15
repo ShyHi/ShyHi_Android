@@ -1,5 +1,5 @@
-ShyHi
-=====
+![alt tag](https://raw.github.com/ChapmanCPSC370/ShyHi/master/misc/shyhi_logo.png)
+
 
 Location based anonymous messaging application. It's like heroin for your connectivity fix. Get frisky.
 
