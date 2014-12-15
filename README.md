@@ -1,4 +1,4 @@
-![alt tag](https://raw.github.com/rugggg/ShyHi/master/misc/shyhi_logo.png)
+![logo](/misc/shyhi_logo.png)
 
 
 Location based anonymous messaging application. It's like heroin for your connectivity fix. Get frisky.
