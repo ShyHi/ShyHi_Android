@@ -1,11 +1,11 @@
-![alt tag](https://raw.github.com/ChapmanCPSC370/ShyHi/master/misc/shyhi_logo.png)
+![alt tag](https://raw.github.com/rugggg/ShyHi/master/misc/shyhi_logo.png)
 
 
 Location based anonymous messaging application. It's like heroin for your connectivity fix. Get frisky.
 
-![alt tag](https://raw.github.com/ChapmanCPSC370/ShyHi/master/misc/shyHi1.png)
-![alt tag](https://raw.github.com/ChapmanCPSC370/ShyHi/master/misc/shyHi2.png)
-![alt tag](https://raw.githubusercontent.com/ChapmanCPSC370/ShyHi/master/misc/shyHi3.png)
+![alt tag](https://raw.github.com/rugggg/ShyHi/master/misc/shyHi1.png)
+![alt tag](https://raw.github.com/rugggg/ShyHi/master/misc/shyHi2.png)
+![alt tag](https://raw.githubusercontent.com/rugggg/ShyHi/master/misc/shyHi3.png)
 
 [What is Shyhi?](http://youtu.be/poksBjqQLPg)
 
