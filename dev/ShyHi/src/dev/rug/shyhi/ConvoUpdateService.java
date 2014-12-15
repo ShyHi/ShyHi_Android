@@ -3,15 +3,11 @@ package dev.rug.shyhi;
 import org.json.JSONObject;
 
 import dev.rug.shyhi.ConvoActivity.ResponseReceiver;
-import android.annotation.SuppressLint;
 import android.app.IntentService;
 import android.content.Intent;
-import android.os.Binder;
-import android.os.IBinder;
 import android.util.Log;
 
 public class ConvoUpdateService extends IntentService {
-
 	RestUtils restUtils = new RestUtils();
 	String convoID;
 	public static final String IN_EXTRA = "convoIdExtra";
@@ -24,12 +20,11 @@ public class ConvoUpdateService extends IntentService {
 	}
 	  @Override
 	  protected void onHandleIntent(Intent intent) {
-		  Log.i("Service: ","Intent recieved");
 		  boolean updateBool = false;
 		  convoID = intent.getStringExtra(IN_EXTRA);
 		  try {
-			  JSONObject j = new JSONObject(restUtils.getUpdateJSON(convoID));
-			  if(!j.isNull("results"))
+			  JSONObject j = new JSONObject(restUtils.getUpdateJSON(convoID,"",false));
+			  if(!j.getString("results").equals("[]")) 
 				  updateBool = true;
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -38,9 +33,7 @@ public class ConvoUpdateService extends IntentService {
 		  broadcastIntent.setAction(ResponseReceiver.ACTION_RESP);
 		  broadcastIntent.addCategory(Intent.CATEGORY_DEFAULT);
 		  broadcastIntent.putExtra(OUT_EXTRA, updateBool);
-		  sendBroadcast(broadcastIntent);
-		  Log.i("Broadcast: ", "GO");
-		  
+		  sendBroadcast(broadcastIntent);  
 	  }
 	
 }
