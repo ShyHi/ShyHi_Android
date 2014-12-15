@@ -2,5 +2,6 @@
 <lint>
     <issue id="NewApi">
         <ignore path="src/dev/rug/shyhi/Message.java" />
+        <ignore path="src/dev/rug/shyhi/RestUtils.java" />
     </issue>
 </lint>

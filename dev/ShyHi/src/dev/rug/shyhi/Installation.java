@@ -15,6 +15,7 @@ import android.util.Log;
 public class Installation {
     private static String sID = null;
     private static final String INSTALLATION = "INSTALLATION";
+    public static String SEQ_ID = "";
     static RestUtils restUtils = new RestUtils();
 
     public synchronized static String id(Context context) {

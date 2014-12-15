@@ -28,7 +28,7 @@ public class ConvoActivity extends ActionBarActivity {
 	RestUtils restUtil = new RestUtils();
 	private Convo convo;
 	public String convoID;
-	private String userID = installation.getUUID();
+	private String userID = Installation.getUUID();
 	private ArrayList<Message> messages;
 	private convoAdapter adapter = null;
     private ResponseReceiver receiver;
@@ -45,7 +45,6 @@ public class ConvoActivity extends ActionBarActivity {
         receiver = new ResponseReceiver();
         registerReceiver(receiver, filter);
 		updateListener(convoID);
-
 	}
 
 	@Override
@@ -53,6 +52,10 @@ public class ConvoActivity extends ActionBarActivity {
 		super.onResume();
 		
 		adapter.notifyDataSetChanged();
+	}
+	protected void onPause(){
+		super.onPause();
+        unregisterReceiver(receiver);
 	}
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -126,7 +129,6 @@ public class ConvoActivity extends ActionBarActivity {
 	    }
 	}
 	public void updateMessages(String convo_id){
-		Log.i("Method: ","UpdateMessages");
 
 		convo = restUtil.getConvoById(convo_id);
 		if(convo.hasMessages())
@@ -140,7 +142,6 @@ public class ConvoActivity extends ActionBarActivity {
 	    lv.setAdapter(adapter);
 	}
 	public void updateListener(String convo_id){
-		Log.i("Method: ","UpdateListener");
 		Intent intent = new Intent(this, ConvoUpdateService.class);
 		intent.putExtra(ConvoUpdateService.IN_EXTRA, convo_id);
 		startService(intent);
@@ -157,7 +158,6 @@ public class ConvoActivity extends ActionBarActivity {
 				   updateMessages(convoID);
 			   }
 			   else
-				   Log.i("Reciever", "No Update");
 			   updateListener(convoID);
 		    }
 		}
