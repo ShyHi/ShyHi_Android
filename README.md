@@ -1,5 +1,6 @@
-![logo](/misc/shyhi_logo.png)
-
+<p align="center">
+  <img src="/misc/shyhi_logo.png"/>
+</p>
 
 Location based anonymous messaging application. It's like heroin for your connectivity fix. Get frisky.
 
