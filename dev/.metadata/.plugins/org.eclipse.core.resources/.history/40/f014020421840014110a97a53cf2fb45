@@ -9,9 +9,7 @@ public class User {
 	private String latitude;
 	private String longitude;
 	
-	public User(){
-		//do something
-	};
+	public User(){};
 	public User(String u, String la, String lo){
 		_id = u;
 		latitude = la;
