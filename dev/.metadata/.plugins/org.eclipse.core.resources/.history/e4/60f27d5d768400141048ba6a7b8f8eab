@@ -42,7 +42,6 @@ public class ConversationsActivity extends ActionBarActivity {
 			userID = intent.getStringExtra("idExtra");
 		}
 		setContentView(R.layout.activity_conversations);
-		UpdaterService.SELF_NOTIFY = true;
 		updateConvos();
 		
 		IntentFilter filter = new IntentFilter(ConvosResponseReceiver.ACTION_RESP);
@@ -75,6 +74,7 @@ public class ConversationsActivity extends ActionBarActivity {
 	@Override
 	protected void onResume(){
 		super.onResume();
+		//updateConvos();
 	}
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
