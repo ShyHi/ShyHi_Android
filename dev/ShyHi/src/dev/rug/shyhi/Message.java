@@ -1,7 +1,13 @@
 package dev.rug.shyhi;
 
 import java.security.Timestamp;
+import java.text.DateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.UUID;
+
+import android.util.Log;
+
 import com.google.gson.annotations.SerializedName;
 
 public class Message {
