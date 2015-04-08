@@ -47,12 +47,12 @@ import android.widget.TextView;
 public class RestUtils {
 	
 	//this is the dev and testing server IP
-	public static String dev_server_str = "http://104.236.22.60:5984/shyhi/";
-	public static String get_convo_view_str = "http://104.236.22.60:5984/shyhi/_design/conversation/_view/get_convo?key=";
-	public static String get_all_convo_view_str = "http://104.236.22.60:5984/shyhi/_design/conversation/_view/get_all_convo?key="; 
-	public static String get_all_user_ids = "http://104.236.22.60:5984/shyhi/_design/users/_view/getAllUserIds";
-	public static String update_all_convos_str = "http://104.236.22.60:5984/shyhi/_changes?filter=users_convo/all_convos&name=";
-	public static String update_one_convo_str = "http://104.236.22.60:5984/shyhi/_changes?filter=users_convo/one_convo&id=";
+	public static String dev_server_str = "http://45.55.151.213:5984/shyhi/";
+	public static String get_convo_view_str = "http://45.55.151.213:5984/shyhi/_design/conversation/_view/get_convo?key=";
+	public static String get_all_convo_view_str = "http://45.55.151.213:5984/shyhi/_design/conversation/_view/get_all_convo?key="; 
+	public static String get_all_user_ids = "http://45.55.151.213:5984/shyhi/_design/users/_view/getAllUserIds";
+	public static String update_all_convos_str = "http://45.55.151.213:5984/shyhi/_changes?filter=users_convo/all_convos&name=";
+	public static String update_one_convo_str = "http://45.55.151.213:5984/shyhi/_changes?filter=users_convo/one_convo&id=";
 
 	public RestUtils(){};
 	
@@ -134,6 +134,7 @@ public class RestUtils {
 				  allUserIDs.add(item.get("key").toString());
 			}
 			userRet = getRandUser(thisUser,allUserIDs);
+
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -195,6 +196,7 @@ public class RestUtils {
     
   //helper method to PUT the JSON object
     public String putJSON(String urlStr, String putStr, int revID) throws Exception{ 
+    	Log.i("attempting new put", urlStr+" "+ putStr+" "+revID);
     	HttpClient httpClient = new DefaultHttpClient();
         HttpResponse response;
         HttpPut put=new HttpPut();
@@ -206,6 +208,7 @@ public class RestUtils {
         put.setURI(new URI(urlStr));
         put.setHeader("Content-type", "application/json");
         response=httpClient.execute(put);
+        Log.e("RESPONSE",response.toString());
         return parseHttpResponse(response,revID);          
      }
     
@@ -221,7 +224,9 @@ public class RestUtils {
         post.setHeader("Accept", "application/json");
         post.setHeader("Content-type", "application/json");
         response=httpClient.execute(post);
-       
+        Log.e("PUT RESPONSE",response.toString());
+        Log.e("URL STR",urlStr+" "+postStr);
+
         return parseHttpResponse(response, 2);          
      }
     
@@ -257,6 +262,7 @@ public class RestUtils {
 		Random rand = new Random();
 	    int randomNum = rand.nextInt(strArr.size());
 	    String randId = strArr.get(randomNum);
+	    randId = randId.substring(1,randId.length()-1);
 	    if(randId.equals(thisUser)){
 	    	getRandUser(thisUser,strArr);
 	    }
