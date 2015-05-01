@@ -57,6 +57,7 @@ local.properties
 # videos
 ./Videos
 ./design
+
 # pdfs,docs
 *.pdf
 *.doc
