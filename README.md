@@ -41,27 +41,29 @@ Check out our forum to communicate with other contributors and to find support: 
 ###How To Install
 ================
 [How to Install ShyHi](http://youtu.be/b8BHmA76tuc)
-
+If you haven't already:
+* Install Eclipse
 * Download and install the [Android SDK and Eclipse ADT](https://developer.android.com/sdk/index.html?hl=i#download)
-* Import project into eclipse workspace
-  * Right click in the package explorer and choose Import
-  * Choose Android > Existing Android Code into Workspace 
-  * Locate ShyHi folder and click OK
-* Check the box thats says 'copy projects into workspace'
-* Right click on the ShyHi folder and go to Properties, then go to the Java Build Path tab
-* Click on Libraries > Add JARs
-* Locate and find android-support-v4 and android-support-v7 (make sure android-support-v7-appcompat is in your workspace)
+* Set up Git
 
-####Common Errors
-* If you are getting the 'R cannot be resolved to a variable' error
-  * Right click on the ShyHi folder and go to properties
-  * Click on the Android tab
-  * Click on the add button in the Library section
-  * Choose android-support-v7-appcompat
-* If 'unable to resolve to target android-19' appears 
-  * Right click on the ShyHi folder and go to properties
-  * Click on the Android tab
-  * Check the box next to Android 4.4W and click Apply
+Cloning from the github repo:
+* Find a location on your machine where you would like to house the project
+* git clone https://github.com/ShyHi/ShyHi_Android.git --depth 1
+* note that the --depth 1 option allows for faster cloning
+
+Importing the Project into Eclipse
+  * File -> Import
+  * Choose Android > Existing Android Code into Workspace 
+  * Locate the cloned repo on your machine and select it
+  * Select both dev/ShyHi and dev/appcompat_v7
+  * Rename dev/ShyHi from HomeScreen to ShyHi, or whatever is desired
+  * Import
+
+Running the application:
+	Via Eclipse:
+	* With an Android device connected via USB Debugging and ADB or an Android Emulator set up, right click the project->run as android application
+	Via APK:
+	Download and install the provided APK.
 
 ###Development Status
 ==================
