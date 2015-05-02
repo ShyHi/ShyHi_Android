@@ -40,7 +40,6 @@ Check out our forum to communicate with other contributors and to find support: 
 
 ###How To Install
 ================
-[How to Install ShyHi](http://youtu.be/b8BHmA76tuc)
 If you haven't already:
 * Install Eclipse
 * Download and install the [Android SDK and Eclipse ADT](https://developer.android.com/sdk/index.html?hl=i#download)
@@ -63,7 +62,7 @@ Running the application:
 	Via Eclipse:
 	* With an Android device connected via USB Debugging and ADB or an Android Emulator set up, right click the project->run as android application
 	Via APK:
-	Download and install the provided APK.
+	* Download and install the provided APK.
 
 ###Development Status
 ==================
