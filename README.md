@@ -3,7 +3,6 @@
 </p>
 
 Location based anonymous messaging application. It's like heroin for your connectivity fix. Get frisky.
-
 ###How To Install
 ================
 If you haven't already:
@@ -24,11 +23,11 @@ Importing the Project into Eclipse
   * Rename dev/ShyHi from HomeScreen to ShyHi, or whatever is desired
   * Import
 
-Running the application:
-	Via Eclipse:
-	* With an Android device connected via USB Debugging and ADB or an Android Emulator set up, right click the project->run as android application
-	Via APK:
-	* Download and install the provided APK.
+Running the application:<br>
+Via Eclipse:<br>
+  * With an Android device connected via USB Debugging and ADB or an Android Emulator set up, right click the project->run as android application
+Via APK <br>
+  * Download and install the provided APK.
 
 
 ![alt tag](https://raw.github.com/rugggg/ShyHi/master/misc/shyHi1.png)
