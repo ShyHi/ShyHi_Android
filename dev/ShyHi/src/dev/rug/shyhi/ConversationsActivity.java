@@ -35,7 +35,7 @@ public class ConversationsActivity extends ActionBarActivity {
 	RestUtils restUtil = new RestUtils(); 
 	
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
+	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		Intent intent = getIntent();
 		if(intent.hasExtra("idExtra")){

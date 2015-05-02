@@ -36,6 +36,14 @@ public class CustomConvoAdapter extends BaseAdapter implements OnClickListener{
 		inflater = (LayoutInflater)activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE); 
 		
 	}
+	public CustomConvoAdapter(ArrayList<Convo> d)/*, Resources resLocal)*/
+	{
+		convos = d;
+		//res = resLocal;							//Reassign past values
+		//Layout inflater to call xml
+		
+	}
+	
 	
 	//Get number of items to display
 	public int getCount() {

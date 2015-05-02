@@ -34,7 +34,7 @@ public class convoAdapter extends ArrayAdapter<Message>{
 			//get and set layout elements
 			TextView msgText = (TextView) rowView.findViewById(R.id.recentMsg);
 			
-			//set the textviews by accessing coznvo object
+			//set the textviews by accessing convo object
 			msgText.setText((itemsArrayList.get(position).getMessageNoQuotes()));
 				return rowView;
 		}
