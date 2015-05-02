@@ -3,6 +3,32 @@
 </p>
 
 Location based anonymous messaging application. It's like heroin for your connectivity fix. Get frisky.
+###How To Install
+================
+If you haven't already:
+* Install Eclipse
+* Download and install the [Android SDK and Eclipse ADT](https://developer.android.com/sdk/index.html?hl=i#download)
+* Set up Git
+
+Cloning from the github repo:
+* Find a location on your machine where you would like to house the project
+* git clone https://github.com/ShyHi/ShyHi_Android.git --depth 1
+* note that the --depth 1 option allows for faster cloning
+
+Importing the Project into Eclipse
+  * File -> Import
+  * Choose Android > Existing Android Code into Workspace 
+  * Locate the cloned repo on your machine and select it
+  * Select both dev/ShyHi and dev/appcompat_v7
+  * Rename dev/ShyHi from HomeScreen to ShyHi, or whatever is desired
+  * Import
+
+Running the application:<br>
+Via Eclipse:<br>
+  * With an Android device connected via USB Debugging and ADB or an Android Emulator set up, right click the project->run as android application <br>
+Via APK <br>
+  * Download and install the provided APK.
+
 
 ![alt tag](https://raw.github.com/rugggg/ShyHi/master/misc/shyHi1.png)
 ![alt tag](https://raw.github.com/rugggg/ShyHi/master/misc/shyHi2.png)
@@ -38,32 +64,6 @@ Check out our forum to communicate with other contributors and to find support: 
 * Anonymous, because we're all to shy to talk to a stranger face to face
 * No log ins, accounts, nothing
 
-###How To Install
-================
-[How to Install ShyHi](http://youtu.be/b8BHmA76tuc)
-If you haven't already:
-* Install Eclipse
-* Download and install the [Android SDK and Eclipse ADT](https://developer.android.com/sdk/index.html?hl=i#download)
-* Set up Git
-
-Cloning from the github repo:
-* Find a location on your machine where you would like to house the project
-* git clone https://github.com/ShyHi/ShyHi_Android.git --depth 1
-* note that the --depth 1 option allows for faster cloning
-
-Importing the Project into Eclipse
-  * File -> Import
-  * Choose Android > Existing Android Code into Workspace 
-  * Locate the cloned repo on your machine and select it
-  * Select both dev/ShyHi and dev/appcompat_v7
-  * Rename dev/ShyHi from HomeScreen to ShyHi, or whatever is desired
-  * Import
-
-Running the application:
-	Via Eclipse:
-	* With an Android device connected via USB Debugging and ADB or an Android Emulator set up, right click the project->run as android application
-	Via APK:
-	Download and install the provided APK.
 
 ###Development Status
 ==================
