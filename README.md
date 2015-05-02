@@ -25,7 +25,7 @@ Importing the Project into Eclipse
 
 Running the application:<br>
 Via Eclipse:<br>
-  * With an Android device connected via USB Debugging and ADB or an Android Emulator set up, right click the project->run as android application
+  * With an Android device connected via USB Debugging and ADB or an Android Emulator set up, right click the project->run as android application <br>
 Via APK <br>
   * Download and install the provided APK.
 
