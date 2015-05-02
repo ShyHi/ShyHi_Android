@@ -5,65 +5,62 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
-public class UserTest {
+import dev.rug.shyhi.User;
+import android.test.AndroidTestCase;
 
+public class UserTest extends AndroidTestCase{
+	User user;
 	@Before
 	public void setUp() throws Exception {
+		user = new User("user1","rev","lat","long");
 	}
-
-	@Test
-	public void testUser() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testUserStringStringString() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testUserStringStringStringString() {
-		fail("Not yet implemented");
-	}
-
+	
 	@Test
 	public void testGetID() {
-		fail("Not yet implemented");
+		assertEquals("testGetId","user1",user.getID());
 	}
 
 	@Test
 	public void testGetRev() {
-		fail("Not yet implemented");
+		assertEquals("testGetRev","rev",user.getRev());
 	}
 
 	@Test
 	public void testGetLat() {
-		fail("Not yet implemented");
+		assertEquals("testGetLat","lat",user.getLat());
 	}
 
 	@Test
 	public void testGetLong() {
-		fail("Not yet implemented");
+		assertEquals("testGetLong","long",user.getLong());
 	}
 
 	@Test
 	public void testSetLat() {
-		fail("Not yet implemented");
+		user.setLat("test");
+		assertEquals("testSetLat","test",user.getLat());
 	}
 
 	@Test
 	public void testSetLong() {
-		fail("Not yet implemented");
+		user.setLong("test");
+		assertEquals("testSetLong","test",user.getLong());
 	}
 
 	@Test
 	public void testSetID() {
-		fail("Not yet implemented");
+		user.setID("test");
+		assertEquals("testGetId","test",user.getID());
 	}
 
 	@Test
 	public void testGetUserForPost() {
-		fail("Not yet implemented");
+		String t = "{"+"\"_id\":"+user.getID()+","+
+				"\"type\":"+"\"user\","+
+				"\"latitude\":"+user.getLat()+","+
+				"\"longitude\":"+user.getLong()+"}";
+		assertEquals("testGetUserForPost",t,user.getUserForPost());
+		
 	}
 
 }

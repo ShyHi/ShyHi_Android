@@ -5,65 +5,52 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
-public class MessageTest {
+import dev.rug.shyhi.Message;
+import android.test.AndroidTestCase;
 
+public class MessageTest extends AndroidTestCase{
+	Message msg;
 	@Before
 	public void setUp() throws Exception {
-	}
-
-	@Test
-	public void testMessage() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testMessageStringStringStringString() {
-		fail("Not yet implemented");
+		msg = new Message("user1","user2","time","message");
 	}
 
 	@Test
 	public void testGetToID() {
-		fail("Not yet implemented");
+		assertEquals("testToID","user1",msg.getToID());
 	}
 
 	@Test
 	public void testGetFromID() {
-		fail("Not yet implemented");
+		assertEquals("testFromID","user2",msg.getFromID());
 	}
 
 	@Test
 	public void testGetTimestamp() {
-		fail("Not yet implemented");
+		assertEquals("testTime","time",msg.getTimestamp());
 	}
 
 	@Test
 	public void testGetMessage() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testGetMessageNoQuotes() {
-		fail("Not yet implemented");
+		assertEquals("testToID","message",msg.getMessage());
 	}
 
 	@Test
 	public void testSetToID() {
-		fail("Not yet implemented");
+		msg.setToID("test");
+		assertEquals("testSetToID","test",msg.getToID());
 	}
 
 	@Test
 	public void testSetFromID() {
-		fail("Not yet implemented");
+		msg.setFromID("test");
+		assertEquals("testSetFromID","test",msg.getFromID());
 	}
 
 	@Test
 	public void testSetMessage() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testMessageToString() {
-		fail("Not yet implemented");
+		msg.setMessage("test");
+		assertEquals("testSetMessage","test",msg.getMessage());
 	}
 
 }
